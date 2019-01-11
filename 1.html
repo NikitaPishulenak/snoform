@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	
+</body>
+
+<meta charset="utf-8">
+<style>
+ .files {
+ 	display: block;
+ }
+
+ .files input[type="file"]{
+  display: none;
+ }
+ .files label {
+  background: red;
+  color: white;
+  display: inline-block;
+ }
+ 
+ .files button::after{
+  content: "Выбрать файл"
+ }
+</style>
+
+
+<div class="files">
+ <input type="file">
+ <label></label>
+ <button></button>
+</div><div class="files">
+ <input type="file">
+ <label></label>
+ <button></button>
+</div><div class="files">
+ <input type="file">
+ <label></label>
+ <button></button>
+</div><div class="files">
+ <input type="file">
+ <label></label>
+ <button></button>
+</div>
+
+<script>
+(function(){
+ for(let wrapper of document.querySelectorAll('.files')){
+  let input = wrapper.querySelector('input');
+  let label = wrapper.querySelector('label');
+  wrapper.querySelector('button').addEventListener('click', e => input.click(), false);
+  input.addEventListener('change', e => label.innerText = e.target.files[0].name, false);
+ }
+})();
+</script>
+</html>
