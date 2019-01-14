@@ -26,6 +26,26 @@ body {
     margin-top: 30px;
 }
 
+div.error {
+    text-align: left;
+    margin: -6px 0 5px 0;
+    color: #800000;
+}
+
+span.req{
+	color: #f92020;
+	font-weight: 600;
+}
+
+div.titleBlock{
+	text-align: left;
+	margin: 12px 0 -5px 0;
+}
+
+.errorBlock{
+	border: solid #800000 1px !important;
+}
+
 #msform fieldset {
     padding: 30px;
     box-sizing: border-box;
@@ -58,7 +78,7 @@ body {
 }
 
 /*inputs*/
-#msform input, #msform textarea {
+#msform input, #msform textarea, #msform select {
     padding: 4px;
     border: 1px solid #ccc;
     border-radius: 0px;
@@ -74,7 +94,7 @@ body {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #ee0979;
+/*    border: 1px solid #ee0979;*/
     outline-width: 0;
     transition: All 0.5s ease-in;
     -webkit-transition: All 0.5s ease-in;
@@ -96,7 +116,8 @@ body {
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
-	background: #2a3cba;
+	background: #3366ff;
+	transition: all .7s;
     /*box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;*/
 }
 
@@ -210,4 +231,16 @@ body {
 .dme_link a:hover, .dme_link a:focus {
     background: #C5C5F1;
     text-decoration: none;
+}
+
+footer {
+/*    height: 5%;*/
+    margin-top: 30px;
+    background-color: #3366ff;
+    color: #fff;
+    /*margin: 0.3% -0.6% -10% -0.6%;*/
+    overflow: hidden;
+    text-align: center;
+    font-size: 19px;
+    padding: 5px 0;
 }

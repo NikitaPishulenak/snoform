@@ -4,7 +4,9 @@ class MainController
 {
     //отображение страницы с формой
 	public function actionIndex(){
-        
+        $section = array();
+        $section = Report::getSectionList();
+        // print_r($section);
 
 		require_once(ROOT . '/views/main/index.php');
 		return true;

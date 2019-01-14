@@ -1,39 +1,22 @@
 <?php
 
-class Product
+class Report
 {
 
-    const SHOW_BY_DEFAULT = 6;
-
-    /**
-     * Returns an array of products
-     */
-    public static function getLatestProducts($count = self::SHOW_BY_DEFAULT, $page = 1)
+    //Получаю список всех секций
+    public static function getSectionList()
     {
-        $page = intval($page);   
-        $countList=self::SHOW_BY_DEFAULT;         
-        $offset = ($page-1) * $countList;
-        
-        
         $db = Db::getConnection();
-        $productsList = array();
+        $sectionList = array();
 
-        $result = $db->query("SELECT id, name, price, is_new FROM product "
-                . "WHERE status = '1'"
-                . "ORDER BY id DESC "                
-                . "LIMIT $offset, $countList");
+        $result = $db->query("SELECT id_section, name_section FROM sections ORDER BY name_section ASC");
 
         $i = 0;
         while ($row = $result->fetch()) {
-            $productsList[$i]['id'] = $row['id'];
-            $productsList[$i]['name'] = $row['name'];
-            // $productsList[$i]['image'] = $row['image'];
-            $productsList[$i]['price'] = $row['price'];
-            $productsList[$i]['is_new'] = $row['is_new'];
+            $sectionList[$i] = $row;
             $i++;
         }
-
-        return $productsList;
+        return $sectionList;
     }
     
     /**
