@@ -16,7 +16,7 @@ require_once(ROOT.'/components/Autoload.php');
 
 
 // 3. Установка соединения с БД
-
+// $db = Db::getConnection();
 
 // 4. Вызор Router
 $router = new Router();

@@ -3,51 +3,55 @@
 class Report
 {
 
+
     //Получаю список всех секций
     public static function getSectionList()
     {
-        $db = Db::getConnection();
+        //$db = Db::getConnection();
+        $db = Db::getInstance()->getConnection();
         $sectionList = array();
 
         $result = $db->query("SELECT id_section, name_section FROM sections ORDER BY name_section ASC");
 
         $i = 0;
-        while ($row = $result->fetch()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $sectionList[$i] = $row;
             $i++;
         }
         return $sectionList;
     }
     
-    /**
-     * Returns an array of products
-     */
-    public static function getProductsListByCategory($categoryId, $page)
+    
+    //Получаю список всех форм участия
+    public static function getFormParticipationList()
     {
-        if ($categoryId) {
-            
-            $page = intval($page);   
-            $countList=self::SHOW_BY_DEFAULT;         
-            $offset = ($page-1) * $countList;
-        
-            $db = Db::getConnection();            
-            $products = array();
-            $result = $db->query("SELECT id, name, price, is_new FROM product "
-                    . "WHERE status = '1' AND category_id = '$categoryId' "
-                    . "ORDER BY id ASC LIMIT $offset, $countList");
+        $db = Db::getInstance()->getConnection();
+        $FormParticipation = array();
 
-            $i = 0;
-            while ($row = $result->fetch()) {
-                $products[$i]['id'] = $row['id'];
-                $products[$i]['name'] = $row['name'];
-                // $products[$i]['image'] = $row['image'];
-                $products[$i]['price'] = $row['price'];
-                $products[$i]['is_new'] = $row['is_new'];
-                $i++;
-            }
+        $result = $db->query("SELECT * FROM formParticipation");
 
-            return $products;       
+        $i = 0;
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $FormParticipation[$i] = $row;
+            $i++;
         }
+        return $FormParticipation;
+    }
+
+    //Получаю список содержание доклада
+    public static function getContentsReportList()
+    {
+        $db = Db::getInstance()->getConnection();
+        $contentsReport = array();
+
+        $result = $db->query("SELECT * FROM contentsReport");
+
+        $i = 0;
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $contentsReport[$i] = $row;
+            $i++;
+        }
+        return $contentsReport;
     }
     
     public static function getCatalogProducts($page=1)
@@ -321,30 +325,6 @@ class Report
         return $products;
     }
 
-    public static function getPrice($price)
-    {
-        if($price=='0'){
-            return 'Цену уточняйте';
-        }else{
-            return $price.' руб.';
-        }
-    }
 
-    public static function getAvaibility($avaib)
-    {
-        switch($avaib){
-            case '1':
-                return 'На складе';
-                break;
-
-            case '2':
-                return 'Под заказ';
-                break;
-
-            default:
-                return 'Нет в наличие';
-                break;
-        }
-    }
 
 }

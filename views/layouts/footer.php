@@ -1,6 +1,6 @@
-<footer id="footer"><!--Footer-->
+<!-- <footer id="footer">
 <span> &copy Центр развития информационных технологий БГМУ <?php echo date('Y'); ?></span>
-</footer><!--/Footer-->
+</footer> -->
 
 	<script src="<?php echo rootFolder; ?>/template/js/jquery-3.3.1.min.js"></script>
 	<script src="<?php echo rootFolder; ?>/template/js/bootstrap.min.js"></script>

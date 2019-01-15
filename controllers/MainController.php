@@ -5,8 +5,12 @@ class MainController
     //отображение страницы с формой
 	public function actionIndex(){
         $section = array();
+        $formParticipation = array();
+        $contentsReport = array();
+        
         $section = Report::getSectionList();
-        // print_r($section);
+        $formParticipation = Report::getFormParticipationList();
+        $contentsReport = Report::getContentsReportList();
 
 		require_once(ROOT . '/views/main/index.php');
 		return true;
