@@ -30,6 +30,7 @@ class Db {
 
 			$dsn = "mysql:host={$params['host']};dbname={$params['dbname']}";
 			$this->_connection = new PDO($dsn, $params['user'], $params['password']);
+			$this->_connection->query("SET NAMES utf8;");
 	}
 	private function __clone(){}
 

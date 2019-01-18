@@ -32,14 +32,21 @@ div.error {
     color: #800000;
 }
 
-span.req{
-	color: #f92020;
+span.req, strong{
 	font-weight: 600;
+}
+
+span.req{
+    color: #f92020;
 }
 
 div.titleBlock{
 	text-align: left;
 	margin: 18px 0 -5px 0;
+}
+
+div.left{
+    text-align: left;
 }
 
 .errorBlock{
@@ -49,8 +56,9 @@ div.titleBlock{
 #msform fieldset {
     padding: 30px;
     box-sizing: border-box;
-    width: 80%;
-    margin: 0 10% 50px 10%;
+    width: 100%;
+    /*margin: 0 10% 50px 10%;*/
+    margin-bottom: 50px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid transparent;
     border-radius: 10px;
@@ -78,7 +86,7 @@ div.titleBlock{
 }
 
 /*inputs*/
-#msform input, #msform textarea, #msform select {
+#msform input[type=text], #msform input[type=file], #msform textarea, #msform select {
     padding: 4px;
     border: 1px solid #ccc;
     border-radius: 0px;
@@ -88,6 +96,9 @@ div.titleBlock{
     font-family: montserrat;
     color: #2C3E50;
     font-size: 14px;
+}
+#msform #fullNameUniver1, #msform #otherFac1{
+    width: 70%;
 }
 
 #msform input:focus, #msform textarea:focus {
@@ -247,5 +258,15 @@ footer {
 
 input[type=file]{
     cursor: pointer;
+}
+div.marg{
+    margin-bottom: 20px;
+}
+div.left label{
+    font-weight: 300;
+    cursor: pointer;
+}
+.hint{
+    color: #ff0000;
 }
 

@@ -4,13 +4,21 @@ class MainController
 {
     //отображение страницы с формой
 	public function actionIndex(){
+        //report
         $section = array();
         $formParticipation = array();
         $contentsReport = array();
+
+        //author
+        $statuses = array();
+        $faculties = array();
         
         $section = Report::getSectionList();
         $formParticipation = Report::getFormParticipationList();
         $contentsReport = Report::getContentsReportList();
+
+        $statuses = Student::getStatusesList();
+        $faculties = Student::getFacultyList();
 
 		require_once(ROOT . '/views/main/index.php');
 		return true;
