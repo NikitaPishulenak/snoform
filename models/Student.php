@@ -33,6 +33,21 @@ class Student
         return $facList;
     }
 
+    public static function getCoursesList()
+    {
+        $db = Db::getInstance()->getConnection();
+        $coursList = array();
+
+        $result = $db->query("SELECT * FROM courses");
+
+        $i = 0;
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $coursList[$i] = $row;
+            $i++;
+        }
+        return $coursList;
+    }
+
 }
 
 ?>

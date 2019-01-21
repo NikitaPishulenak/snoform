@@ -13,7 +13,8 @@
 body {
 
     font-family: montserrat, arial, verdana;
-    background: transparent;
+    background-image: url('/snoform/template/images/svetlyj-fon.jpg');
+    background-size: cover;
 }
 .row{
 	margin-right: 0;
@@ -86,7 +87,7 @@ div.left{
 }
 
 /*inputs*/
-#msform input[type=text], #msform input[type=file], #msform textarea, #msform select {
+#msform input[type=text], #msform input[type=email], #msform input[type=file], #msform textarea, #msform select {
     padding: 4px;
     border: 1px solid #ccc;
     border-radius: 0px;
@@ -97,7 +98,7 @@ div.left{
     color: #2C3E50;
     font-size: 14px;
 }
-#msform #fullNameUniver1, #msform #otherFac1{
+#msform #fullNameUniver1, #msform #otherFac1, #msform #fullNameUniver2, #msform #otherFac2{
     width: 70%;
 }
 
@@ -256,7 +257,7 @@ footer {
     padding: 5px 0;
 }
 
-input[type=file]{
+input[type=file], input[type=radio], select{
     cursor: pointer;
 }
 div.marg{

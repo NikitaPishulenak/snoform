@@ -13,7 +13,7 @@
         <link rel="shortcut icon" href="<?php echo rootFolder; ?>/template/images/ico/favicon.ico">
     </head>
 
-    <body style="background-image: url(<?php echo rootFolder; ?>/template/images/svetlyj-fon.jpg); min-height: 100%; ">
+    <body>
     <!-- <header id="header">
 
         <div class="col-sm-12 ">

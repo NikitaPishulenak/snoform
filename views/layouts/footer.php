@@ -5,6 +5,7 @@
 	<script src="<?php echo rootFolder; ?>/template/js/jquery-3.3.1.min.js"></script>
 	<script src="<?php echo rootFolder; ?>/template/js/bootstrap.min.js"></script>
 	<script src="<?php echo rootFolder; ?>/template/js/jquery.easing.min.js"></script>
+	<script src="<?php echo rootFolder; ?>/template/js/jquery.maskedinput.min.js"></script>
 	<script src="<?php echo rootFolder; ?>/template/js/main.js"></script>
 	
 

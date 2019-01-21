@@ -12,6 +12,7 @@ class MainController
         //author
         $statuses = array();
         $faculties = array();
+        $courses = array();
         
         $section = Report::getSectionList();
         $formParticipation = Report::getFormParticipationList();
@@ -19,6 +20,7 @@ class MainController
 
         $statuses = Student::getStatusesList();
         $faculties = Student::getFacultyList();
+        $courses = Student::getCoursesList();
 
 		require_once(ROOT . '/views/main/index.php');
 		return true;

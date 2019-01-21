@@ -130,7 +130,7 @@ function stepsValidate(step){
         break;
         
         case "step2":  
-            if(($("input#fio1").val().trim()=='') || ($("input#fio1").val().trim().length<3)){
+            if($("input#fio1").val().trim().length<3){
                 showError('input#fio1', 'Заполните поле!');
             }
             if(($("input[name='universityName1']:checked").val()=="0") && ($("input#fullNameUniver1").val().trim().length<3)){
@@ -144,6 +144,19 @@ function stepsValidate(step){
             }
             if(($("input[name='facultyName1']:checked").val()=="0") && ($("input#otherFac1").val().trim().length<3)){
                 showError('input#otherFac1', 'Заполните поле!');
+            }
+            if($("select#courseAuthor1").val()==0){
+                showError('select#courseAuthor1', 'Выберите из списка!');
+            }
+            var re = /\S+@\S+\.\S+/;
+            if(!re.test($("input#emailAuthor1").val().trim())){
+                showError('input#emailAuthor1', 'Заполните поле!');
+            }
+            if($("input#telAuthor1").val().trim().length==0){
+                showError('input#telAuthor1', 'Заполните поле!');
+            }
+            if(($("input[name=haveSecondAuthor]").val()=="1") && ($("input#fio2").val().trim().length<3)){
+                showError('input#fio2', 'Заполните поле!');
             }
 
 
@@ -221,13 +234,10 @@ function CheckFile(file, typeFile) {
 }
 
 $(document).ready(function(){
-    $("#fullNameUniver1").hide();
-    $("#otherFac1").hide();otherFac1
+    $("#fullNameUniver1, #fullNameUniver2").prop('disabled', true);
+    $("#otherFac1, #otherFac2").prop('disabled', true);
+    $(".tel").mask('+375-(99)-999-99-99');
+    $("#coauthor").hide();
     
-    // $("input[name=universityName1]").change(function(){
-    //     if($("input[name=universityName1]").val="0"){
-    //         console.log('other');
-    //     }
-    // });
 });
 
