@@ -13,6 +13,11 @@ class MainController
         $statuses = array();
         $faculties = array();
         $courses = array();
+
+        //teatcher
+        $scientificDegree = array();
+        $academicRanks = array();
+        $positionSupervisor = array();
         
         $section = Report::getSectionList();
         $formParticipation = Report::getFormParticipationList();
@@ -21,6 +26,10 @@ class MainController
         $statuses = Student::getStatusesList();
         $faculties = Student::getFacultyList();
         $courses = Student::getCoursesList();
+
+        $scientificDegree = Teatcher::getScientificDegreeList();
+        $academicRanks = Teatcher::getAcademicRanksList();
+        $positionSupervisor = Teatcher::getPositionSupervisorList();
 
 		require_once(ROOT . '/views/main/index.php');
 		return true;

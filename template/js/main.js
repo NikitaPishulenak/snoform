@@ -7,7 +7,6 @@ var statusVal='';
 var stepVerify=true; //Фрлаг есть ли ошибка валидации. Не пускать на другую страницу
 
 $(".next").click(function(){
-    console.log('nextClick');
     hideError();
     
     var stepTitle='';
@@ -29,6 +28,10 @@ $(".next").click(function(){
 
     
     if(statusVal){
+        if ($(this).hasClass('submit')){
+            document.location.href = "/snoform/sendForm";
+        }
+
         //activate next step on progressbar using the index of next_fs
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
         
@@ -99,9 +102,6 @@ $(".previous").click(function(){
     });
 });
 
-$(".submit").click(function(){
-    return false;
-})
 
 function stepsValidate(step){
   
@@ -155,17 +155,38 @@ function stepsValidate(step){
             if($("input#telAuthor1").val().trim().length==0){
                 showError('input#telAuthor1', 'Заполните поле!');
             }
-            if(($("input[name=haveSecondAuthor]").val()=="1") && ($("input#fio2").val().trim().length<3)){
-                showError('input#fio2', 'Заполните поле!');
-            }
-
+            // if(($("input[name=haveSecondAuthor]").val()=="1") && ($("input#fio2").val().trim().length<3)){
+            //     showError('input#fio2', 'Заполните поле!');
+            // }
 
         return stepVerify;
         break;
         
         case "step3":  
-            return true;
-            break;
+            if($("input#fioSupervisor1").val().trim().length<3){
+                showError('input#fioSupervisor1', 'Заполните поле!');
+            }
+            if($("select#scientificDegree1").val()==0){
+                showError('select#scientificDegree1', 'Выберите из списка!');
+            }
+            if($("select#academicRanks1").val()==0){
+                showError('select#academicRanks1', 'Выберите из списка!');
+            }
+            if($("select#positionSupervisor1").val()==0){
+                showError('select#positionSupervisor1', 'Выберите из списка!');
+            }
+            if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
+                showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
+            }
+            if($("input#departmentSupervisor1").val().trim().length<3){
+                showError('input#departmentSupervisor1', 'Заполните поле!');
+            }
+            if(stepVerify){
+                $( "form:first" ).submit();
+            }
+
+        // return stepVerify;
+        break;
 
     }
 }
@@ -233,11 +254,36 @@ function CheckFile(file, typeFile) {
     return false;
 }
 
+// function verStep3(){
+//     // var vStep3=false;
+//     console.log('3');
+//     if($("input#fioSupervisor1").val().trim().length<3){
+//         showError('input#fioSupervisor1', 'Заполните поле!');
+
+//     }
+//     if($("select#scientificDegree1").val()==0){
+//         showError('select#scientificDegree1', 'Выберите из списка!');
+//     }
+//     if($("select#academicRanks1").val()==0){
+//         showError('select#academicRanks1', 'Выберите из списка!');
+//     }
+//     if($("select#positionSupervisor1").val()==0){
+//         showError('select#positionSupervisor1', 'Выберите из списка!');
+//     }
+//     if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
+//         showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
+//     }
+//     if($("input#departmentSupervisor1").val().trim().length<3){
+//         showError('input#departmentSupervisor1', 'Заполните поле!');
+//     }
+// console.log(stepVerify);
+//     return stepVerify;
+// }
+
 $(document).ready(function(){
-    $("#fullNameUniver1, #fullNameUniver2").prop('disabled', true);
+    $("#fullNameUniver1, #fullNameUniver2, #nameOtherUniversitySupervisor1").prop('disabled', true);
     $("#otherFac1, #otherFac2").prop('disabled', true);
     $(".tel").mask('+375-(99)-999-99-99');
     $("#coauthor").hide();
-    
 });
 

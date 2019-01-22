@@ -98,7 +98,7 @@ div.left{
     color: #2C3E50;
     font-size: 14px;
 }
-#msform #fullNameUniver1, #msform #otherFac1, #msform #fullNameUniver2, #msform #otherFac2{
+#msform #fullNameUniver1, #msform #otherFac1, #msform #fullNameUniver2, #msform #otherFac2, #msform #nameOtherUniversitySupervisor1, #msform #nameOtherUniversitySupervisor2{
     width: 70%;
 }
 
