@@ -1,50 +1,26 @@
 <?php
 
-class Student
+class Student extends Base
 {
 
     public static function getStatusesList()
     {
-        $db = Db::getInstance()->getConnection();
         $statusesList = array();
-
-        $result = $db->query("SELECT * FROM statuses ORDER BY name_status ASC");
-
-        $i = 0;
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $statusesList[$i] = $row;
-            $i++;
-        }
+        $statusesList = Base::select("SELECT * FROM statuses ORDER BY name_status ASC");
         return $statusesList;
     }
 
     public static function getFacultyList()
     {
-        $db = Db::getInstance()->getConnection();
         $facList = array();
-
-        $result = $db->query("SELECT * FROM faculties ");
-
-        $i = 0;
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $facList[$i] = $row;
-            $i++;
-        }
+        $facList = Base::select("SELECT * FROM faculties");
         return $facList;
     }
 
     public static function getCoursesList()
     {
-        $db = Db::getInstance()->getConnection();
         $coursList = array();
-
-        $result = $db->query("SELECT * FROM courses");
-
-        $i = 0;
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $coursList[$i] = $row;
-            $i++;
-        }
+        $coursList = Base::select("SELECT * FROM courses");
         return $coursList;
     }
 

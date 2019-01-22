@@ -1,49 +1,25 @@
 <?php
 
-class Teatcher
+class Teatcher extends Base
 {
     public static function getScientificDegreeList()
-    {
-        $db = Db::getInstance()->getConnection();
+    {      
         $scientificDegree = array();
-
-        $result = $db->query("SELECT * FROM scientificDegree ORDER BY name_scientificDegree ASC");
-
-        $i = 0;
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $scientificDegree[$i] = $row;
-            $i++;
-        }
+        $scientificDegree = Base::select("SELECT * FROM scientificDegree ORDER BY name_scientificDegree ASC");
         return $scientificDegree;
     }
 
     public static function getAcademicRanksList()
     {
-        $db = Db::getInstance()->getConnection();
         $academicRanks = array();
-
-        $result = $db->query("SELECT * FROM academicRanks ORDER BY name_academicRanks ASC");
-
-        $i = 0;
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $academicRanks[$i] = $row;
-            $i++;
-        }
+        $academicRanks = Base::select("SELECT * FROM academicRanks ORDER BY name_academicRanks ASC");
         return $academicRanks;
     }
 
     public static function getPositionSupervisorList()
     {
-        $db = Db::getInstance()->getConnection();
         $positionSupervisor = array();
-
-        $result = $db->query("SELECT * FROM positionSupervisor ORDER BY name_positionSupervisor ASC");
-
-        $i = 0;
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $positionSupervisor[$i] = $row;
-            $i++;
-        }
+        $positionSupervisor = Base::select("SELECT * FROM positionSupervisor ORDER BY name_positionSupervisor ASC");
         return $positionSupervisor;
     }
 }
