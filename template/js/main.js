@@ -110,77 +110,75 @@ function stepsValidate(step){
             if(($("input#titleOfPaper").val().trim()=='') || ($("input#titleOfPaper").val().trim().length<3)){
                 showError('input#titleOfPaper', 'Введите корректные данные!');
             }
-            if($("select#sectionSel").val()==0){
-                showError('select#sectionSel', 'Выберите секцию из списка!');
-            }
-            if($("select#formParticipationSel").val()==0){
-                showError('select#formParticipationSel', 'Выберите из списка!');
-            }
-            if($("select#contentsReportSel").val()==0){
-                showError('select#contentsReportSel', 'Выберите из списка!');
-            }
-            if($("input#uploadFilePDF").val()==''){
-                showError('input#uploadFilePDF', 'Прикрепить .pdf файл!');
-            }
-            if($("input#uploadFileDOC").val()==''){
-                showError('input#uploadFileDOC', 'Прикрепить .doc файл!');
-            }
-
-        return stepVerify;
-        break;
-        
-        case "step2":  
-            if($("input#fio1").val().trim().length<3){
-                showError('input#fio1', 'Заполните поле!');
-            }
-            if(($("input[name='universityName1']:checked").val()=="0") && ($("input#fullNameUniver1").val().trim().length<3)){
-                showError('input#fullNameUniver1', 'Заполните поле!');
-            }
-            if($("input#abbreviatureUniver1").val().trim().length<3){
-                showError('input#abbreviatureUniver1', 'Заполните поле!');
-            }
-            if($("select#statusAuthor1").val()==0){
-                showError('select#statusAuthor1', 'Выберите из списка!');
-            }
-            if(($("input[name='facultyName1']:checked").val()=="0") && ($("input#otherFac1").val().trim().length<3)){
-                showError('input#otherFac1', 'Заполните поле!');
-            }
-            if($("select#courseAuthor1").val()==0){
-                showError('select#courseAuthor1', 'Выберите из списка!');
-            }
-            var re = /\S+@\S+\.\S+/;
-            if(!re.test($("input#emailAuthor1").val().trim())){
-                showError('input#emailAuthor1', 'Заполните поле!');
-            }
-            if($("input#telAuthor1").val().trim().length==0){
-                showError('input#telAuthor1', 'Заполните поле!');
-            }
-            // if(($("input[name=haveSecondAuthor]").val()=="1") && ($("input#fio2").val().trim().length<3)){
-            //     showError('input#fio2', 'Заполните поле!');
+            // if($("select#sectionSel").val()==0){
+            //     showError('select#sectionSel', 'Выберите секцию из списка!');
+            // }
+            // if($("select#formParticipationSel").val()==0){
+            //     showError('select#formParticipationSel', 'Выберите из списка!');
+            // }
+            // if($("select#contentsReportSel").val()==0){
+            //     showError('select#contentsReportSel', 'Выберите из списка!');
+            // }
+            // if($("input#uploadFilePDF").val()==''){
+            //     showError('input#uploadFilePDF', 'Прикрепить .pdf файл!');
+            // }
+            // if($("input#uploadFileDOC").val()==''){
+            //     showError('input#uploadFileDOC', 'Прикрепить .doc файл!');
             // }
 
         return stepVerify;
         break;
         
+        case "step2":  
+            // if($("input#fio1").val().trim().length<3){
+            //     showError('input#fio1', 'Заполните поле!');
+            // }
+            // if(($("input[name='universityName1']:checked").val()=="0") && ($("input#fullNameUniver1").val().trim().length<3)){
+            //     showError('input#fullNameUniver1', 'Заполните поле!');
+            // }
+            // if($("input#abbreviatureUniver1").val().trim().length<3){
+            //     showError('input#abbreviatureUniver1', 'Заполните поле!');
+            // }
+            // if($("select#statusAuthor1").val()==0){
+            //     showError('select#statusAuthor1', 'Выберите из списка!');
+            // }
+            // if(($("input[name='facultyName1']:checked").val()=="0") && ($("input#otherFac1").val().trim().length<3)){
+            //     showError('input#otherFac1', 'Заполните поле!');
+            // }
+            // if($("select#courseAuthor1").val()==0){
+            //     showError('select#courseAuthor1', 'Выберите из списка!');
+            // }
+            // var re = /\S+@\S+\.\S+/;
+            // if(!re.test($("input#emailAuthor1").val().trim())){
+            //     showError('input#emailAuthor1', 'Заполните поле!');
+            // }
+            // if($("input#telAuthor1").val().trim().length==0){
+            //     showError('input#telAuthor1', 'Заполните поле!');
+            // }
+
+
+        return stepVerify;
+        break;
+        
         case "step3":  
-            if($("input#fioSupervisor1").val().trim().length<3){
-                showError('input#fioSupervisor1', 'Заполните поле!');
-            }
-            if($("select#scientificDegree1").val()==0){
-                showError('select#scientificDegree1', 'Выберите из списка!');
-            }
-            if($("select#academicRanks1").val()==0){
-                showError('select#academicRanks1', 'Выберите из списка!');
-            }
-            if($("select#positionSupervisor1").val()==0){
-                showError('select#positionSupervisor1', 'Выберите из списка!');
-            }
-            if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
-                showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
-            }
-            if($("input#departmentSupervisor1").val().trim().length<3){
-                showError('input#departmentSupervisor1', 'Заполните поле!');
-            }
+            // if($("input#fioSupervisor1").val().trim().length<3){
+            //     showError('input#fioSupervisor1', 'Заполните поле!');
+            // }
+            // if($("select#scientificDegree1").val()==0){
+            //     showError('select#scientificDegree1', 'Выберите из списка!');
+            // }
+            // if($("select#academicRanks1").val()==0){
+            //     showError('select#academicRanks1', 'Выберите из списка!');
+            // }
+            // if($("select#positionSupervisor1").val()==0){
+            //     showError('select#positionSupervisor1', 'Выберите из списка!');
+            // }
+            // if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
+            //     showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
+            // }
+            // if($("input#departmentSupervisor1").val().trim().length<3){
+            //     showError('input#departmentSupervisor1', 'Заполните поле!');
+            // }
             if(stepVerify){
                 $( "form:first" ).submit();
             }
