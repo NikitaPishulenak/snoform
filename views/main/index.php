@@ -67,7 +67,7 @@
                     <div class="left">
                         <label><input type="radio" name="universityName1" onclick="handelRB(this, 'fullNameUniver1');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
                         <label><input type="radio" name="universityName1" onclick="handelRB(this, 'fullNameUniver1');" value="0" id="rbUniver1"> Другой</label>
-                        <input type="text" name="nameOtherUniversity" id="fullNameUniver1">
+                        <input type="text" name="nameOtherUniversity1" id="fullNameUniver1">
                     </div>
 
                     <div class="titleBlock"><strong> Сокращенное название учебного заведения/организации автора (Abbreviation of the institution, which the
