@@ -1,7 +1,7 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form id="msform" method="post" action="sendForm">
+        <form id="msform" method="post" action="sendForm" enctype="multipart/form-data">
             <ul id="progressbar">
                     <li class="active">Доклад</li>
                     <li>Участник</li>
