@@ -8,7 +8,7 @@ class Report extends Base
     public static function getSectionList()
     {
         $sectionList = array();
-        $sectionList =Base::select("SELECT id_section, name_section FROM sections ORDER BY name_section ASC");
+        $sectionList = Base::select("SELECT id_section, name_section FROM sections ORDER BY name_section ASC");
         return $sectionList;
     }
     
@@ -28,4 +28,5 @@ class Report extends Base
         $contentsReport = Base::select("SELECT * FROM contentsReport");
         return $contentsReport;
     }
+    
 }
