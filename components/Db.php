@@ -23,7 +23,6 @@ class Db {
 	private $_connection = null;
 
 	private function __construct(){
-			echo "Connect";
 			$paramsPath = ROOT . '/config/db_params.php';
 			$params = include($paramsPath);
 

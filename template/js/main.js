@@ -67,6 +67,36 @@ $(".next").click(function(){
     
 });
 
+$("input.reg-button").click(function(){
+    hideError();
+    var re = /\S+@\S+\.\S+/;
+    if(!re.test($("input#emailReg").val().trim())){
+        showError('input#emailReg', 'Заполните поле email!');
+    }
+    if($("input#password1Reg").val().trim().length<6){
+        showError('input#password1Reg', 'Пароль должен быть не менее 6 символов!');
+    }
+    if($("input#password2Reg").val().trim().length<6){
+        showError('input#password2Reg', 'Пароль должен быть не менее 6 символов!');
+    }
+    if($("input#password2Reg").val().trim()!=$("input#password1Reg").val().trim()){
+        showError('input#password2Reg', 'Введенные пароли не совпадают!');
+    }
+    return stepVerify;
+});
+
+$("input.login-button").click(function(){
+    hideError();
+    var re = /\S+@\S+\.\S+/;
+    if(!re.test($("input#email").val().trim())){
+        showError('input#email', 'Заполните поле email!');
+    }
+    if($("input#password").val().trim().length<6){
+        showError('input#password', 'Пароль должен быть не менее 6 символов!');
+    }
+    return stepVerify;
+});
+
 $(".previous").click(function(){
     if(animating) return false;
     animating = true;
@@ -110,6 +140,9 @@ function stepsValidate(step){
             if(($("input#titleOfPaper").val().trim()=='') || ($("input#titleOfPaper").val().trim().length<3)){
                 showError('input#titleOfPaper', 'Введите корректные данные!');
             }
+            // if($("input#fio1").val().trim().length<3){
+            //     showError('input#fio1', 'Заполните поле!');
+            // }
             // if($("select#sectionSel").val()==0){
             //     showError('select#sectionSel', 'Выберите секцию из списка!');
             // }

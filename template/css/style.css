@@ -13,7 +13,7 @@
 body {
 
     font-family: montserrat, arial, verdana;
-    background-image: url('/snoform/template/images/svetlyj-fon.jpg');
+    background: #fff url('/snoform/template/images/svetlyj-fon.jpg') top center no-repeat fixed;
     background-size: cover;
 }
 .row{
@@ -54,22 +54,24 @@ div.left{
 	border: solid #800000 1px !important;
 }
 
-#msform fieldset {
+#msform fieldset, #authform fieldset, #regform fieldset{
     padding: 30px;
     box-sizing: border-box;
     width: 100%;
-    /*margin: 0 10% 50px 10%;*/
-    margin-bottom: 50px;
+    margin: 0 0 50px 7px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid transparent;
     border-radius: 10px;
     box-shadow: 0px 0px 8px #666;
-
-    /*stacking fieldsets above each other*/
     position: relative;
+    text-align: center;
 }
 
-#msform .contentF {
+#authform fieldset, #regform fieldset{
+    margin-top: 40px;
+}
+
+#msform .contentF, #authform .contentF, #regform .contentF {
     background: #efefef;
     border: solid #dedddb 3px;
     border-radius: 8px;
@@ -87,7 +89,7 @@ div.left{
 }
 
 /*inputs*/
-#msform input[type=text], #msform input[type=email], #msform input[type=file], #msform textarea, #msform select {
+input[type=text], input[type=email], input[type=file], input[type=password], textarea, select {
     padding: 4px;
     border: 1px solid #ccc;
     border-radius: 0px;
@@ -102,32 +104,37 @@ div.left{
     width: 70%;
 }
 
-#msform input:focus, #msform textarea:focus {
+input[type=submit]:active, input[type=submit]:focus{
+    outline: none;
+}
+input:focus, textarea:focus {
+/*    border: none;*/
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 /*    border: 1px solid #ee0979;*/
     outline-width: 0;
-    transition: All 0.5s ease-in;
-    -webkit-transition: All 0.5s ease-in;
-    -moz-transition: All 0.5s ease-in;
-    -o-transition: All 0.5s ease-in;
+    transition: All 0.5s ease-in-out;
+    -webkit-transition: All 0.5s ease-in-out;
+    -moz-transition: All 0.5s ease-in-out;
+    -o-transition: All 0.5s ease-in-out;
 }
 
 /*buttons*/
-#msform .action-button {
-    width: 100px;
+#msform .action-button, #authform .login-button, #regform .reg-button {
+    min-width: 100px;
+    max-width: 140px;
     background: #2a9fba;
     font-weight: bold;
     color: white;
     border: 0 none;
     border-radius: 25px;
     cursor: pointer;
-    padding: 10px 5px;
+    padding: 10px 13px;
     margin: 10px 5px;
 }
 
-#msform .action-button:hover, #msform .action-button:focus {
+#msform .action-button:hover, #msform .action-button:focus, #authform .login-button:hover, #authform .login-button:focus, #regform .login-button:hover, #regform .login-button:focus {
 	background: #3366ff;
 	transition: all .7s;
     /*box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;*/
@@ -267,7 +274,11 @@ div.left label{
     font-weight: 300;
     cursor: pointer;
 }
-.hint{
+.hint, li.error{
     color: #ff0000;
 }
-
+li.error{
+    list-style: none;
+    text-align: left;
+    padding-left: 15px;
+}

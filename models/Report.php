@@ -29,9 +29,20 @@ class Report extends Base
         return $contentsReport;
     }
 
-    //Сохраняю файл на сервере
-    public static function saveFile($file, $size, $typeFile, $name)
+    //Создаю папки 72 шт (нужен для админки)
+    public static function createDirectory()
     {
+        $arrFolder = array();
+        $arrFolder=Base::select("SELECT name_sectionName FROM sectionsName");
+        foreach ($arrFolder as $value){
+            mkdir(ROOT."/reports/" .$value['name_sectionName'], 0777);
+        }
+    }
+
+    //Сохраняю файл на сервере
+    public static function saveFile($file, $size, $typeFile, $name, $idSection)
+    {
+        print_r($file);
         if (is_uploaded_file($file['tmp_name'])) {
             if ($file['size'] <= $size * 1024 * 1024) {
             	$pre_name=Base::translit($name);
@@ -41,12 +52,10 @@ class Report extends Base
             		$file_name = $pre_name ."(". $i .")". $typeFile;
             		$i++;
             	}
-                
-                // $resultFolder = mysqli_query($dbc, "SELECT name_sectionName FROM sectionsName WHERE id_sectionName='$section'")
-                // or die ("Не удалось извлечь имя папки");
-                // $folder = mysqli_fetch_row($resultFolder);
+                $resultFolder = Base::select("SELECT name_sectionName FROM sectionsName WHERE id_sectionName=".$idSection);
+                $sectionFolder = $resultFolder[0]['name_sectionName'];
                 $file['name'] = $file_name;
-                move_uploaded_file($file['tmp_name'], ROOT."/reports/" . $file['name']);
+                move_uploaded_file($file['tmp_name'], ROOT."/reports/" . $sectionFolder . "/" . $file['name']);
                 return true;
             } else {
                 return false;
@@ -59,7 +68,9 @@ class Report extends Base
     
     //Вставляю доклад в БД
     public static function sendToDB($array) {
-    	self::saveFile($_FILES['reportFilePDF'], 1, '.pdf', 'Гена Гришин');
+        $fioName=($array['fio2']) ? $array['fio1']."-".$array['fio2'] : $array['fio1'];
+    	self::saveFile($_FILES['reportFilePDF'], 1, '.pdf', $fioName, $array['sectionSel']);
+        self::saveFile($_FILES['reportFileDOC'], 1, '.doc', $fioName, $array['sectionSel']);
         
         $db = Db::getInstance()->getConnection(); 
         

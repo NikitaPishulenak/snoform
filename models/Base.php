@@ -3,8 +3,13 @@
 class Base
 {
   
-    public static function select($query){
+    public static function select($query){//, $clause = array()
         $db = Db::getInstance()->getConnection();
+        // $whwre = 'WHERE ';
+        // $values = array_values($clause);
+        // foreach(array_keys($clause) as $key){
+        //     $whwre .= "$key = ?"
+        // }
         $sth = $db->prepare($query);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
@@ -19,3 +24,4 @@ class Base
 
 
 }
+

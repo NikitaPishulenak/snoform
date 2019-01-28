@@ -10,9 +10,9 @@ return array(
 	// 'phpShop/category/([0-9]+)' => 'catalog/category/$1',
 	// 'phpShop/page-([0-9]+)' => 'site/index/$1',
 	// 'phpShop/contacts' => 'site/contact',
-	// 'phpShop/login' => 'user/login',
-	// 'phpShop/logout' => 'user/logout', //вход пользователя
-	// 'phpShop/register' => 'user/register', //регистрация пользователя
+	'snoform/login' => 'user/login',
+	'snoform/logout' => 'user/logout', //вход пользователя
+	'snoform/register' => 'user/register', //регистрация пользователя
 
 	// 'phpShop/search/([a-zA-Zа-яА-я\d%]+)' => 'site/search/$1',
 	
@@ -45,7 +45,7 @@ return array(
 	// 'phpShop/admin/order/view/([0-9]+)' => 'adminOrder/view/$1',
 	// 'phpShop/admin/order' => 'adminOrder/index',
 	
-	// 'phpShop/admin' => 'admin/index',
+	'snoform/admin' => 'admin/index',
 	
 	
 	'snoform/sendForm' => 'main/sendF',

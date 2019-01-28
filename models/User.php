@@ -2,15 +2,14 @@
 
 class User
 {
-    public static function register($name, $email, $password) {
+    public static function register($email, $password) {
         
-        $db = Db::getConnection();
+        $db = Db::getInstance()->getConnection(); 
         
-        $sql = 'INSERT INTO user (name, email, password) '
-                . 'VALUES (:name, :email, md5(:password))';
+        $sql = 'INSERT INTO user (email, password, dtReg) '
+                . 'VALUES (:email, md5(:password), CURRENT_TIMESTAMP())';
         
         $result = $db->prepare($sql);
-        $result->bindParam(':name', $name, PDO::PARAM_STR);
         $result->bindParam(':email', $email, PDO::PARAM_STR);
         $result->bindParam(':password', $password, PDO::PARAM_STR);
         
@@ -18,37 +17,28 @@ class User
     }
     
 
-    public static function checkFieldEmpty($field) {
-        if (!empty($field)) {
-            return true;
-        }
-        return false;
-    }
+    // public static function checkFieldEmpty($field) {
+    //     if (!empty($field)) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 
-    /**
-     * Проверяет имя: не меньше, чем 2 символа
-     */
-    public static function checkName($name) {
-        if (strlen($name) >= 2) {
-            return true;
-        }
-        return false;
-    }
+    // /**
+    //  * Проверяет имя: не меньше, чем 2 символа
+    //  */
+    // public static function checkName($name) {
+    //     if (strlen($name) >= 2) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
-    /**
-     * Проверяет телефон
-     */
-    public static function checkPhoneNumber($phone) {
-        if (strlen($phone) >= 7) {
-            return true;
-        }
-        return false;
-    }
-    
-    /**
-     * Проверяет имя: не меньше, чем 6 символов
-     */
+        
+    // *
+    //  * Проверяет имя: не меньше, чем 6 символов
+     
     public static function checkPassword($password) {
         if (strlen($password) >= 6) {
             return true;
@@ -56,34 +46,33 @@ class User
         return false;
     }
     
-    /**
-     * Проверяет email
-     */
-    public static function checkEmail($email) {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return true;
-        }
-        return false;
-    }
+    // /**
+    //  * Проверяет email
+    //  */
+    // public static function checkEmail($email) {
+    //     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
     
-    public static function checkEmailExists($email) {
-        
-        $db = Db::getConnection();
-        
-        $sql = 'SELECT COUNT(*) FROM user WHERE email = :email';
-        
-        $result = $db->prepare($sql);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->execute();
-
-        if($result->fetchColumn())
+    /**
+    //  Передаю $countVal=0 для регистрации  $countVal=1 для авторизации
+    //  */
+    public static function checkEmailExists($email, $countVal) {
+        $result = Base::select("SELECT COUNT(*) AS count FROM user WHERE email ='$email'");
+        print_r($result);
+        if($result[0]['count']==$countVal){
             return true;
-        return false;
+        }else{
+           return false; 
+        }
     }
 
+    //Проверяю логин пароль
     public static function checkUserData($email, $password)
     {
-        $db = Db::getConnection();
+        $db = Db::getInstance()->getConnection(); 
 
         $sql = 'SELECT * FROM user WHERE email = :email AND password = md5(:password)';
 
@@ -104,14 +93,14 @@ class User
     {
         $_SESSION['user'] = $userId;
         
-        $db = Db::getConnection();
-        $sql = 'SELECT name, email FROM user WHERE id = :id';
+        $db = Db::getInstance()->getConnection(); 
+        $sql = 'SELECT email FROM user WHERE id = :id';
         $result = $db->prepare($sql);
         $result->bindParam(':id', $userId, PDO::PARAM_INT);
         $result->execute();
 
         $row=$result->fetch(PDO::FETCH_ASSOC);
-        $_SESSION['name'] = $row['name'];
+        // $_SESSION['name'] = $row['name'];
         $_SESSION['email'] = $row['email'];
     }
 
@@ -121,7 +110,7 @@ class User
         if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
         }else{
-            ?><script>document.location.href='/phpShop/login'</script><?php
+            ?><script>document.location.href='/snoform/login'</script><?php
         }       
     }
 
@@ -158,13 +147,12 @@ class User
             return true;
         }
         else{
-            //echo $row['password']."<br>".md5($pwd);
             return false;
         }
     }
 
     public static function equalPwd($pwd1, $pwd2) {
-        if ($pwd1==$pwd2){
+        if ($pwd1===$pwd2){
             return true; 
         }
         else{
@@ -187,10 +175,7 @@ class User
 
     public static function getUserById($id)
     {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Текст запроса к БД
+        $db = Db::getInstance()->getConnection(); 
         $sql = 'SELECT * FROM user WHERE id = :id';
 
         // Получение и возврат результатов. Используется подготовленный запрос
