@@ -16,26 +16,6 @@ class User
         return $result->execute();
     }
     
-
-    // public static function checkFieldEmpty($field) {
-    //     if (!empty($field)) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-
-    // /**
-    //  * Проверяет имя: не меньше, чем 2 символа
-    //  */
-    // public static function checkName($name) {
-    //     if (strlen($name) >= 2) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-        
     // *
     //  * Проверяет имя: не меньше, чем 6 символов
      
@@ -61,7 +41,7 @@ class User
     //  */
     public static function checkEmailExists($email, $countVal) {
         $result = Base::select("SELECT COUNT(*) AS count FROM user WHERE email ='$email'");
-        print_r($result);
+        echo $result[0]['count'];
         if($result[0]['count']==$countVal){
             return true;
         }else{
@@ -110,7 +90,7 @@ class User
         if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
         }else{
-            ?><script>document.location.href='/snoform/login'</script><?php
+            Base::redirect("/enter");
         }       
     }
 

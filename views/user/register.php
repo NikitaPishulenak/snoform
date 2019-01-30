@@ -24,6 +24,7 @@
                                     <input type="email" name="emailReg" id="emailReg" placeholder="E-mail" value="<?php echo $email; ?>"/>
                                     <input type="password" name="password1Reg" id="password1Reg" placeholder="Пароль" value="<?php echo $password1; ?>"/>
                                     <input type="password" name="password2Reg" id="password2Reg" placeholder="Подтвердите пароль" value="<?php echo $password1; ?>"/>
+                                    <div class="g-recaptcha" data-sitekey="6LfRwo0UAAAAADjpFgP-N5gEdfgse346cY8E9ypr"></div>
                                     <input type="submit" name="submit" class="btn reg-button" value="Регистрация" />
                                 </div>
                             </fieldset>

@@ -274,7 +274,7 @@ function CheckFile(file, typeFile) {
     }
 
     if (!good_size) {// Если не прошли валидацию по размеру файла
-        error += "Внимание! Ваш файл превышает допустимый размер 1 Mb! Выберите другой файл!";
+        error += "Внимание! Ваш файл превышает допустимый размер 1 Mb! Выберите другой файл или воспользуйтесь онлайн-сервисом для сжатия файла!";
     }
     // Если есть ошибки
     if (error != '') {
@@ -312,9 +312,13 @@ function CheckFile(file, typeFile) {
 // }
 
 $(document).ready(function(){
-    $("#fullNameUniver1, #fullNameUniver2, #nameOtherUniversitySupervisor1").prop('disabled', true);
+    $("#fullNameUniver1, #fullNameUniver2, #nameOtherUniversitySupervisor1, #nameOtherUniversitySupervisor2").prop('disabled', true);
     $("#otherFac1, #otherFac2").prop('disabled', true);
     $(".tel").mask('+375-(99)-999-99-99');
-    $("#coauthor").hide();
+    $("#coauthor, #secondSupervisor").hide();
+    $("input[name='universityName1']").change(function(){
+        ($("input[name='universityName1']:checked").val()!="0") ? $("#abbreviatureUniver1").val("БГМУ") : $("#abbreviatureUniver1").val("");
+    });
+    
 });
 

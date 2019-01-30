@@ -18,7 +18,8 @@ include ROOT . '/views/layouts/header.php';
                                 </ul>
                             <?php endif; ?>
                             <div class="contentF">
-                                <input type="email" name="email" id="email" placeholder="E-mail" value=""/>
+                                <h3 class="fs-subtitle">Все участники конференции должны быть зарегистрированы в системе независимо от ВУЗа</h3>
+                                <input type="email" name="email" id="email" placeholder="E-mail" value="<?php if (isset($_SESSION['email'])) echo $_SESSION['email']; ?>"/>
                                 <input type="password" name="password" id="password" placeholder="Пароль" value=""/>
                                 <input type="submit" name="submit" class="btn login-button" value="Вход" /><br>
                                 <span>У меня еще нет учетной записи.&nbsp; <a href="<?php echo rootFolder; ?>/register">Зарегистрироваться.</a></span>

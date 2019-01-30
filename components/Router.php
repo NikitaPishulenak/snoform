@@ -51,8 +51,9 @@ class Router
                 $controllerFile = ROOT . '/controllers/' .
                         $controllerName . '.php';
 
-                // echo "<br>Где : ".$controllerName;
-                // echo "<br>Что: ".$actionName;
+                echo "<br>Где : ".$controllerName;
+                echo "<br>Что: ".$actionName;
+                //print_r($_SESSION);
                 // echo "<br>параметры: ".$parameters;
 
                 if (file_exists($controllerFile)) {

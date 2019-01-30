@@ -11,7 +11,7 @@ class AdminController extends AdminBase
         echo "админка";
 
         // Подключаем вид
-        require_once(ROOT . '/views/admin/index.php');
+        // require_once(ROOT . '/views/admin/index.php');
         return true;
     }
 

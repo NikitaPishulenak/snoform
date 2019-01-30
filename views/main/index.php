@@ -10,7 +10,7 @@
             <fieldset>
                 
                 <h2 class="fs-title">Доклад</h2>
-                <h3 class="fs-subtitle">Tell us something more about you</h3>
+                <h3 class="fs-subtitle">Информация о докладе</h3>
                 <div class="contentF" >
                     <div class="titleBlock"><strong> Название работы (Title of Paper)</strong><span class="req">*</span></div>
                     <input type="text" name="titleOfPaper" id="titleOfPaper" placeholder="Лечение хронического холецистита"/>
@@ -72,7 +72,7 @@
 
                     <div class="titleBlock"><strong> Сокращенное название учебного заведения/организации автора (Abbreviation of the institution, which the
                 Author represent)</strong><span class="req">*</span></div>
-                    <input type="text" name="abbreviatureUniver1" id="abbreviatureUniver1" placeholder="БГМУ">
+                    <input type="text" name="abbreviatureUniver1" id="abbreviatureUniver1" placeholder="Аббревиатура" value="БГМУ">
 
                     
                     <div class="titleBlock"><strong> Статус автора (Status of the author)</strong><span class="req">*</span><br><em class="hint"> На момент участия в Конференции!</em></div>
@@ -89,10 +89,10 @@
                     <div class="marg"></div>
                     <div class="left">
                         <?php foreach ($faculties as $faculty):?>
-                            <label><input checked type="radio" name="facultyName1" onclick="handelRB(this, 'otherFac1');" value="<?php echo $faculty['id_faculti']; ?>"><?php echo $faculty['name_faculti']; ?></label><br>
+                            <label><input checked type="radio" name="facultyName1" onclick="handelRB(this, 'otherFac1');" value="<?php echo $faculty['name_faculti']; ?>"><?php echo $faculty['name_faculti']; ?></label><br>
                         <?php endforeach; ?>
                         <label><input type="radio" name="facultyName1" onclick="handelRB(this, 'otherFac1');" value="0" id="rbFac1">Другое/Other</label>
-                        <input type="text" name="nameOtherFaculty" id="otherFac1" placeholder="Профориентации">
+                        <input type="text" name="nameOtherFaculty1" id="otherFac1" placeholder="Профориентации">
                     </div>
 
                     <div class="titleBlock"><strong> Курс автора (Course)</strong><span class="req">*</span></div>
@@ -104,7 +104,7 @@
                     </select>
 
                     <div class="titleBlock"><strong> E-mail автора</strong><span class="req">*</span><br><em class="hint">Внимание! Указанный Вами e-mail будет использован Оргкомитетом Конференции для обратной связи (Attention! Your e-mail will be used by the Organizing Commitee of the Conference for feedback)</em></div>
-                    <input type="email" name="emailAuthor1" id="emailAuthor1" placeholder="example@exam.ru" />
+                    <input type="email" name="emailAuthor1" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" id="emailAuthor1" placeholder="example@exam.ru" />
 
                     <div class="titleBlock"><strong> Телефон автора (Telephone №)</strong><span class="req">*</span></div>
                     <input type="text" name="telAuthor1" id="telAuthor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
@@ -127,7 +127,7 @@
                         <div class="left">
                             <label><input type="radio" name="universityName2" onclick="handelRB(this, 'fullNameUniver2');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
                             <label><input type="radio" name="universityName2" onclick="handelRB(this, 'fullNameUniver2');" value="0" id="rbUniver2"> Другой</label>
-                            <input type="text" name="nameOtherUniversity" id="fullNameUniver2">
+                            <input type="text" name="nameOtherUniversity2" id="fullNameUniver2">
                         </div>
 
                         <div class="titleBlock"><strong> Сокращенное название учебного заведения/организации соавтора </strong></div>
@@ -147,10 +147,10 @@
                         <div class="marg"></div>
                         <div class="left">
                             <?php foreach ($faculties as $faculty):?>
-                                <label><input type="radio" name="facultyName2" onclick="handelRB(this, 'otherFac2');" value="<?php echo $faculty['id_faculti']; ?>"><?php echo $faculty['name_faculti']; ?></label><br>
+                                <label><input type="radio" name="facultyName2" onclick="handelRB(this, 'otherFac2');" value="<?php echo $faculty['name_faculti']; ?>"><?php echo $faculty['name_faculti']; ?></label><br>
                             <?php endforeach; ?>
                             <label><input type="radio" name="facultyName2" onclick="handelRB(this, 'otherFac2');" value="0" id="rbFac2">Другое/Other</label>
-                            <input type="text" name="nameOtherFaculty" id="otherFac2" placeholder="Профориентации">
+                            <input type="text" name="nameOtherFaculty2" id="otherFac2" placeholder="Профориентации">
                         </div>
 
                         <div class="titleBlock"><strong> Курс соавтора</strong></div>
@@ -220,12 +220,65 @@
 
                     <div class="titleBlock"><strong> Телефон 1-го научного руководителя (Telephone № of the 1st Supervisor)</strong></div>
                     <input type="text" name="telSupervisor1" id="telSupervisor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
-                
+                    <div class="titleBlock"><strong> У вас есть второй научныйруководитель?</strong></div>
+                    <div class="marg"></div>
+                    <div class="left">
+                        <label><input type="radio" name="haveSecondSup" onclick="coauthor(this, 'secondSupervisor');" value="1" id="haveSecondSupY">Да</label>
+                        <label><input type="radio" name="haveSecondSup" onclick="coauthor(this, 'secondSupervisor');" value="0" id="haveSecondSupN" value="0" checked style="margin-left: 20px;">Нет</label>
+                    </div>
+
+
+                    <div id="secondSupervisor">
+                        <h2 class="fs-subtitle">Информация о втором руководителе</h2>
+                        <div class="titleBlock"><strong> ФИО 2-го научного руководителя (Surname Name of the 2st Supervisor)</strong><span class="req">*</span></div>
+                        <input type="text" name="fioSupervisor2" id="fioSupervisor2" placeholder="Рахман Борис Мойсеевич"/>
+
+                        <div class="titleBlock"><strong> Учёная степень 2-го научного руководителя (Scientific degree of the 2st Supervisor)</strong></div>
+                        <select id="scientificDegree2" name="scientificDegree2">
+                            <option value="0">Не выбрано</option>
+                            <?php foreach ($scientificDegree as $sD):
+                                echo '<option value="' . $sD['id_scientificDegree'] . '">' . $sD['name_scientificDegree'] . '</option>';
+                            endforeach; ?>
+                        </select>
+
+                        <div class="titleBlock"><strong> Учёное звание 2-го научного руководителя (Academic rank of the 2st Supervisor)</strong></div>
+                        <select id="academicRanks2" name="academicRanks2">
+                            <option value="0">Не выбрано</option>
+                            <?php foreach ($academicRanks as $aR):
+                                echo '<option value="' . $aR['id_academicRanks'] . '">' . $aR['name_academicRanks'] . '</option>';
+                            endforeach; ?>
+                        </select>
+
+                        <div class="titleBlock"><strong> Должность 2-го научного руководителя (Position of the 2st Supervisor)</strong></div>
+                        <select id="positionSupervisor2" name="positionSupervisor2">
+                            <option value="0">Не выбрано</option>
+                            <?php foreach ($positionSupervisor as $pS):
+                                echo '<option value="' . $pS['id_positionSupervisor'] . '">' . $pS['name_positionSupervisor'] . '</option>';
+                            endforeach; ?>
+                        </select>
+
+                        <div class="titleBlock"><strong>Полное название учебного заведения/организации 2-го научного руководителя (Full name of the 2st
+                        Supervisor institution)</strong><span class="req">*</span></div>
+                        
+                        <div class="marg"></div>
+                        <div class="left">
+                            <label><input type="radio" name="universityNameSupervisor2" onclick="handelRB(this, 'nameOtherUniversitySupervisor2');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
+                            <label><input type="radio" name="universityNameSupervisor2" onclick="handelRB(this, 'nameOtherUniversitySupervisor2');" value="0" id="rbOtherUniversitySupervisor2"> Другой</label>
+                            <input type="text" name="nameOtherUniversitySupervisor2" id="nameOtherUniversitySupervisor2">
+                        </div>
+
+                        <div class="titleBlock"><strong> Название кафедры/структурного подразделения 2-го научного руководителя (Department)</strong></div>
+                        <input type="text" name="departmentSupervisor2" id="departmentSupervisor2" placeholder="Название кафедры">
+
+                        <div class="titleBlock"><strong> Телефон 2-го научного руководителя (Telephone № of the 2st Supervisor)</strong></div>
+                        <input type="text" name="telSupervisor2" id="telSupervisor2" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+
+                    </div>
+
                 </div>
                 <input type="button" name="previous" class="previous action-button-previous" value="Назад"/>
                 <input type="button" name="" class="next action-button step3 submit" value="Отправить"/>
             </fieldset>
-<!--             <input type="submit" class="action-button" value="Submit"> -->
         </form>
     </div>
 </div>

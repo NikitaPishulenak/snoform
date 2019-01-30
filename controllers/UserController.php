@@ -3,7 +3,9 @@
 class UserController
  {
 	public function actionRegister(){
-
+        if(!User::isGuest()){
+            Base::redirect("/");
+        }
         $email='';
         $password1='';
         $password2='';
@@ -30,15 +32,43 @@ class UserController
             }
 
             if ($errors == false) {
-                $result = User::register($email, $password1);
-                if($result){
-                    $userId=User::checkUserData($email, $password1);
-                    User::auth($userId);
-                    ?>
-                    <script>document.location.href='/snoform'</script>
-                    <?php
-                    exit;
+                // 
+                $rCode = $_POST['g-recaptcha-response'];
+                $rUrl = 'https://www.google.com/recaptcha/api/siteverify';
+                $rSecret = '6LfRwo0UAAAAAEPeBHu-u7FhtAXETLPNSRfu9H8Z';
+                $ip = $_SERVER['REMOTE_ADDR'];
+
+                $curl = curl_init($rUrl);
+
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+                curl_setopt($curl, CURLOPT_POSTFIELDS, 'secret='.$rSecret.'&response='.$rCode.'&remoteip='.$ip);
+                curl_setopt($curl, CURLINFO_HEADER_OUT, false);
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+                $res = curl_exec($curl);
+                curl_close($curl);
+                $res = json_decode($res);
+
+                if ($res->success) {
+                    $result = User::register($email, $password1);
+                    if($result){
+                        $userId=User::checkUserData($email, $password1);
+
+                        $msg='Здравствуйте!<br>Вы успешно зарегистрировались на сайте <a href="'.$_SERVER['HTTP_HOST'].'">'.$_SERVER['HTTP_HOST'].'</a><br><strong>Логин:</strong><span>'.$email.'</span><br><strong>Пароль:</strong><span>'.$password1.'</span><br><br><em>С уважением, руководство СНО БГМУ.</em>';
+                        Base::sendMail($email, $msg);
+
+                        User::auth($userId);
+                        Base::redirect("/");
+                        exit;
+                    }
+                } else {
+                   ?><script>alert("Ботам здесь не место!");</script><?php
                 }
+
+                
             }
         }
 
@@ -47,7 +77,6 @@ class UserController
     }
 
     public function actionLogin(){
-
         $email='';
         $password='';
         $result = false;
@@ -63,40 +92,20 @@ class UserController
 
             if (!User::checkEmailExists($email, 1)) {
                 $errors[] = 'Пользователь с таким логином не зарегистрирован!';
-            }
-            $userId=User::checkUserData($email, $password);
-            if(!$userId){
-                $errors[] = 'Неверный логин и/или пароль!';
             }else{
-                User::auth($userId);
-                if(User::checkAdmin()){
-                    ?><script>document.location.href='/snoform/admin'</script><?php
+                $userId=User::checkUserData($email, $password);
+                if(!$userId){
+                    $errors[] = 'Неверный логин и/или пароль!';
                 }else{
-                    ?>
-                    <script>document.location.href='/snoform'</script>
-                    <?php
+                    User::auth($userId);
+                    if(User::checkAdmin()){
+                        Base::redirect("/admin");
+                    }else{
+                        Base::redirect("/");
+                    }
                 }
             }
-
-            
-            // if(!$userId){
-            //     $errors[] = 'Неверный логин и/или пароль!';
-            // }else {
-            //     // Если данные правильные, запоминаем пользователя (сессия)
-            //     User::auth($userId);
-            //     echo $_SESSION['user'];
-        //         if(User::checkAdmin()){
-        //             ?>
-        <!-- <script>document.location.href='/phpShop/admin'</script> -->
-        <?php
-        //         }else{
-        //             ?>
-        <!-- <script>document.location.href='/phpShop/cabinet'</script> -->
-        <?php
-        //         }
-            // }
-            
-        
+       
         }
 
         require_once(ROOT . '/views/user/login.php');
@@ -105,7 +114,7 @@ class UserController
 
     public function actionLogout(){
         unset($_SESSION['user']);
-        ?><script>document.location.href='/snoform/login'</script><?php
+        Base::redirect("/enter");
 		return true;
     }
 
