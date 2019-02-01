@@ -77,6 +77,9 @@ class UserController
     }
 
     public function actionLogin(){
+        if(!User::isGuest()){
+            Base::redirect("/");
+        }
         $email='';
         $password='';
         $result = false;

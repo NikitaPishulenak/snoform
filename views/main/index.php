@@ -13,9 +13,8 @@
                 <h3 class="fs-subtitle">Информация о докладе</h3>
                 <div class="contentF" >
                     <div class="titleBlock"><strong> Название работы (Title of Paper)</strong><span class="req">*</span></div>
-                    <input type="text" name="titleOfPaper" id="titleOfPaper" placeholder="Лечение хронического холецистита"/>
-
-                    <div class="titleBlock" title="Прикрепите .pdf файл скан-копии вашего доклада с визами научных руководителей"><strong>.pdf файл скан-копии доклада с визами</strong><span class="req">*</span><span style="color: #8c0000; font-size: 0.9em"><br><i>Размер файла не должен превышать 1Mb</i></span></div>
+                    <input type="text" maxlength="140" name="titleOfPaper" id="titleOfPaper" placeholder="Лечение хронического холецистита"/>
+                    <div class="titleBlock" title="Прикрепите .pdf файл скан-копии вашего доклада с визами научных руководителей"><strong>.pdf файл скан-копии доклада с визами</strong><span class="req">*</span><span style="color: #8c0000; font-size: 0.9em"><br><i>Размер файла не должен превышать 1Mb</i></span><br><em class="hint"><a target="blank" href="https://smallpdf.com/ru/compress-pdf">Онлайн-сервис сжатия .pdf документов </a></em></div>
                     <input type="file" name="reportFilePDF" id="uploadFilePDF" onchange="CheckFile(this, 'pdf')" accept="application/pdf" title="Прикрепите .pdf файл скан-копии вашего доклада с визами научных руководителей. Размер файла не должен превышать 1Mb.">
 
                     <div class="titleBlock" title="Прикрепите .doc файл вашего доклада"><strong>.doc файл доклада</strong><span class="req">*</span><span style="color: #8c0000; font-size: 0.9em"><br><i>Размер файла не должен превышать 1Mb</i></span></div>
@@ -58,7 +57,7 @@
                 <h3 class="fs-subtitle">Информация о авторе</h3>
                 <div class="contentF" >
                     <div class="titleBlock"><strong> ФИО автора (Author`s Surname Name)</strong><span class="req">*</span></div>
-                    <input type="text" name="fio1" id="fio1" placeholder="Иванов Степан Викторович"/>
+                    <input type="text" maxlength="140" name="fio1" id="fio1" placeholder="Иванов Степан Викторович"/>
 
                     <div class="titleBlock"><strong>Полное название учебного заведения/организации автора (Full name of the institution which the Author
                 represent)</strong><span class="req">*</span></div>
@@ -66,13 +65,13 @@
                     <div class="marg"></div>
                     <div class="left">
                         <label><input type="radio" name="universityName1" onclick="handelRB(this, 'fullNameUniver1');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
-                        <label><input type="radio" name="universityName1" onclick="handelRB(this, 'fullNameUniver1');" value="0" id="rbUniver1"> Другой</label>
+                        <label><input type="radio" maxlength="140" name="universityName1" onclick="handelRB(this, 'fullNameUniver1');" value="0" id="rbUniver1"> Другой</label>
                         <input type="text" name="nameOtherUniversity1" id="fullNameUniver1">
                     </div>
 
                     <div class="titleBlock"><strong> Сокращенное название учебного заведения/организации автора (Abbreviation of the institution, which the
                 Author represent)</strong><span class="req">*</span></div>
-                    <input type="text" name="abbreviatureUniver1" id="abbreviatureUniver1" placeholder="Аббревиатура" value="БГМУ">
+                    <input type="text" maxlength="140" name="abbreviatureUniver1" id="abbreviatureUniver1" placeholder="Аббревиатура" value="БГМУ">
 
                     
                     <div class="titleBlock"><strong> Статус автора (Status of the author)</strong><span class="req">*</span><br><em class="hint"> На момент участия в Конференции!</em></div>
@@ -92,7 +91,7 @@
                             <label><input checked type="radio" name="facultyName1" onclick="handelRB(this, 'otherFac1');" value="<?php echo $faculty['name_faculti']; ?>"><?php echo $faculty['name_faculti']; ?></label><br>
                         <?php endforeach; ?>
                         <label><input type="radio" name="facultyName1" onclick="handelRB(this, 'otherFac1');" value="0" id="rbFac1">Другое/Other</label>
-                        <input type="text" name="nameOtherFaculty1" id="otherFac1" placeholder="Профориентации">
+                        <input type="text" maxlength="140" name="nameOtherFaculty1" id="otherFac1" placeholder="Профориентации">
                     </div>
 
                     <div class="titleBlock"><strong> Курс автора (Course)</strong><span class="req">*</span></div>
@@ -104,9 +103,14 @@
                     </select>
 
                     <div class="titleBlock"><strong> E-mail автора</strong><span class="req">*</span><br><em class="hint">Внимание! Указанный Вами e-mail будет использован Оргкомитетом Конференции для обратной связи (Attention! Your e-mail will be used by the Organizing Commitee of the Conference for feedback)</em></div>
-                    <input type="email" name="emailAuthor1" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" id="emailAuthor1" placeholder="example@exam.ru" />
+                    <input type="email" maxlength="140" name="emailAuthor1" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" id="emailAuthor1" placeholder="example@exam.ru" />
 
                     <div class="titleBlock"><strong> Телефон автора (Telephone №)</strong><span class="req">*</span></div>
+                    
+<!--                     <select id="countryA1" name="countryA1" onchange="show(this)">       
+                        <option value=".by" selected>+375</option>
+                        <option value=".ru">+7</option>
+                    <input type="text" id="phoneNumber" /> -->
                     <input type="text" name="telAuthor1" id="telAuthor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
 
                     <div class="titleBlock"><strong> У вас есть соавтор?</strong></div>
@@ -120,18 +124,18 @@
                     <div id="coauthor">
                         <h2 class="fs-subtitle">Информация о соавторе</h2>
                         <div class="titleBlock"><strong> ФИО соавтора </strong><span class="req">*</span></div>
-                        <input type="text" name="fio2" id="fio2" placeholder="Иванов Степан Викторович"/>
+                        <input type="text" maxlength="140" name="fio2" id="fio2" placeholder="Иванов Степан Викторович"/>
 
                         <div class="titleBlock"><strong>Полное название учебного заведения/организации соавтора </strong><br><br></div>
                         
                         <div class="left">
                             <label><input type="radio" name="universityName2" onclick="handelRB(this, 'fullNameUniver2');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
                             <label><input type="radio" name="universityName2" onclick="handelRB(this, 'fullNameUniver2');" value="0" id="rbUniver2"> Другой</label>
-                            <input type="text" name="nameOtherUniversity2" id="fullNameUniver2">
+                            <input type="text" maxlength="140" name="nameOtherUniversity2" id="fullNameUniver2">
                         </div>
 
                         <div class="titleBlock"><strong> Сокращенное название учебного заведения/организации соавтора </strong></div>
-                        <input type="text" name="abbreviatureUniver2" id="abbreviatureUniver2" placeholder="БГМУ">
+                        <input type="text" maxlength="140" name="abbreviatureUniver2" id="abbreviatureUniver2" placeholder="БГМУ">
 
                         
                         <div class="titleBlock"><strong> Статус соавтора </strong></div>
@@ -150,7 +154,7 @@
                                 <label><input type="radio" name="facultyName2" onclick="handelRB(this, 'otherFac2');" value="<?php echo $faculty['name_faculti']; ?>"><?php echo $faculty['name_faculti']; ?></label><br>
                             <?php endforeach; ?>
                             <label><input type="radio" name="facultyName2" onclick="handelRB(this, 'otherFac2');" value="0" id="rbFac2">Другое/Other</label>
-                            <input type="text" name="nameOtherFaculty2" id="otherFac2" placeholder="Профориентации">
+                            <input type="text" maxlength="140" name="nameOtherFaculty2" id="otherFac2" placeholder="Профориентации">
                         </div>
 
                         <div class="titleBlock"><strong> Курс соавтора</strong></div>
@@ -162,7 +166,7 @@
                         </select>
 
                         <div class="titleBlock"><strong> E-mail соавтора</strong></div>
-                        <input type="email" name="emailAuthor2" id="emailAuthor2" placeholder="example@exam.ru" />
+                        <input type="email"  maxlength="140" name="emailAuthor2" id="emailAuthor2" placeholder="example@exam.ru" />
 
                         <div class="titleBlock"><strong> Телефон соавтора </strong></div>
                         <input type="text" name="telAuthor2" id="telAuthor2" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
@@ -179,7 +183,7 @@
                 <h3 class="fs-subtitle">Информация о руководителе</h3>
                 <div class="contentF">
                     <div class="titleBlock"><strong> ФИО 1-го научного руководителя (Surname Name of the 1st Supervisor)</strong><span class="req">*</span></div>
-                    <input type="text" name="fioSupervisor1" id="fioSupervisor1" placeholder="Рахман Борис Мойсеевич"/>
+                    <input type="text" maxlength="140" name="fioSupervisor1" id="fioSupervisor1" placeholder="Рахман Борис Мойсеевич"/>
 
                     <div class="titleBlock"><strong> Учёная степень 1-го научного руководителя (Scientific degree of the 1st Supervisor)</strong></div>
                     <select id="scientificDegree1" name="scientificDegree1">
@@ -212,11 +216,11 @@
                     <div class="left">
                         <label><input type="radio" name="universityNameSupervisor1" onclick="handelRB(this, 'nameOtherUniversitySupervisor1');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
                         <label><input type="radio" name="universityNameSupervisor1" onclick="handelRB(this, 'nameOtherUniversitySupervisor1');" value="0" id="rbOtherUniversitySupervisor1"> Другой</label>
-                        <input type="text" name="nameOtherUniversitySupervisor1" id="nameOtherUniversitySupervisor1">
+                        <input type="text" maxlength="140" name="nameOtherUniversitySupervisor1" id="nameOtherUniversitySupervisor1">
                     </div>
 
                     <div class="titleBlock"><strong> Название кафедры/структурного подразделения 1-го научного руководителя (Department)</strong></div>
-                    <input type="text" name="departmentSupervisor1" id="departmentSupervisor1" placeholder="Название кафедры">
+                    <input type="text" maxlength="140" name="departmentSupervisor1" id="departmentSupervisor1" placeholder="Название кафедры">
 
                     <div class="titleBlock"><strong> Телефон 1-го научного руководителя (Telephone № of the 1st Supervisor)</strong></div>
                     <input type="text" name="telSupervisor1" id="telSupervisor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
@@ -231,7 +235,7 @@
                     <div id="secondSupervisor">
                         <h2 class="fs-subtitle">Информация о втором руководителе</h2>
                         <div class="titleBlock"><strong> ФИО 2-го научного руководителя (Surname Name of the 2st Supervisor)</strong><span class="req">*</span></div>
-                        <input type="text" name="fioSupervisor2" id="fioSupervisor2" placeholder="Рахман Борис Мойсеевич"/>
+                        <input type="text" maxlength="140" name="fioSupervisor2" id="fioSupervisor2" placeholder="Рахман Борис Мойсеевич"/>
 
                         <div class="titleBlock"><strong> Учёная степень 2-го научного руководителя (Scientific degree of the 2st Supervisor)</strong></div>
                         <select id="scientificDegree2" name="scientificDegree2">
@@ -264,11 +268,11 @@
                         <div class="left">
                             <label><input type="radio" name="universityNameSupervisor2" onclick="handelRB(this, 'nameOtherUniversitySupervisor2');" value="Белорусский государственный медицинский университет" checked> Белорусский государственный медицинский университет</label><br>
                             <label><input type="radio" name="universityNameSupervisor2" onclick="handelRB(this, 'nameOtherUniversitySupervisor2');" value="0" id="rbOtherUniversitySupervisor2"> Другой</label>
-                            <input type="text" name="nameOtherUniversitySupervisor2" id="nameOtherUniversitySupervisor2">
+                            <input type="text" maxlength="140" name="nameOtherUniversitySupervisor2" id="nameOtherUniversitySupervisor2">
                         </div>
 
                         <div class="titleBlock"><strong> Название кафедры/структурного подразделения 2-го научного руководителя (Department)</strong></div>
-                        <input type="text" name="departmentSupervisor2" id="departmentSupervisor2" placeholder="Название кафедры">
+                        <input type="text" maxlength="140" name="departmentSupervisor2" id="departmentSupervisor2" placeholder="Название кафедры">
 
                         <div class="titleBlock"><strong> Телефон 2-го научного руководителя (Telephone № of the 2st Supervisor)</strong></div>
                         <input type="text" name="telSupervisor2" id="telSupervisor2" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />

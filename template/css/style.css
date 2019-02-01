@@ -282,3 +282,71 @@ li.error{
     text-align: left;
     padding-left: 15px;
 }
+
+.blueColor{
+    color: #0000FF;
+}
+.containerInfo{
+    text-align: center;
+    padding: 25px 10px;
+}
+
+header{
+    text-align: center;
+}
+header img{
+    max-width: 100%;
+    padding: 0;
+}
+
+header div.menu{
+    margin-top: 15px;
+    text-align: right;
+    max-width: 100%;
+} 
+
+div.menu a{
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+div.reportItem{
+    border: solid #bae4fd 2px;
+    min-height: 100px;
+    padding: 10px;
+    margin: 5px;
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+div.edt{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 13px;
+    color: #3b91d4;
+}
+
+div.edt:hover{
+    font-size: 15px;
+    cursor: pointer;
+    color: #337ab7;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+
+}
+
+div.reportItem:hover{
+    opacity: 0.8;
+    box-shadow: 0px 0px 8px #666;
+    color: #000;
+}
+
+em.author{
+    padding-left: 20px;
+}

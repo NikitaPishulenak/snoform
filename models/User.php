@@ -26,15 +26,6 @@ class User
         return false;
     }
     
-    // /**
-    //  * Проверяет email
-    //  */
-    // public static function checkEmail($email) {
-    //     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
     
     /**
     //  Передаю $countVal=0 для регистрации  $countVal=1 для авторизации
@@ -90,7 +81,7 @@ class User
         if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
         }else{
-            Base::redirect("/enter");
+            return false;
         }       
     }
 
@@ -167,6 +158,25 @@ class User
         $result->execute();
 
         return $result->fetch();
+    }
+
+    public static function getUserReports($idUser)
+    {
+        $idUser = intval($idUser);
+        $reports = Base::select("SELECT *  FROM reports WHERE id_user = ".$idUser." ORDER BY id_report  DESC");
+        return $reports;
+        // $db = Db::getInstance()->getConnection(); 
+        // $sql = 'SELECT *  FROM reports WHERE id_user = :idUser ORDER BY id_report  DESC';
+
+        // // Получение и возврат результатов. Используется подготовленный запрос
+        // $result = $db->prepare($sql);
+        // $result->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+
+        // // Указываем, что хотим получить данные в виде массива
+        // $result->setFetchMode(PDO::FETCH_ASSOC);
+        // $result->execute();
+        // // print_r($result);
+        // return $result->fetch();
     }
 
     

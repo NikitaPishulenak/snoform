@@ -22,7 +22,8 @@ return array(
 
 	// 'phpShop/cabinet/editPassword' => 'cabinet/editPassword',
 	// 'phpShop/cabinet/history' => 'cabinet/showOrder',
-	// 'phpShop/cabinet' => 'cabinet/index',
+	'snoform/cabinet/edit/([0-9]+)' => 'cabinet/editForm/$1',
+	'snoform/cabinet' => 'cabinet/index',
 
 	// 'phpShop/cart/delete/([0-9]+)' => 'cart/deleteProduct/$1',
 	// 'phpShop/cart/addAjax/([0-9]+)' => 'cart/addProduct/$1', 

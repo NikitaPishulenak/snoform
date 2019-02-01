@@ -81,7 +81,7 @@ class Base
         }
     }
 
-    function read_smtp_answer($socket) {
+    private static function read_smtp_answer($socket) {
         $read = socket_read($socket, 1024);
            
         if ($read{0} != '2' && $read{0} != '3') {
@@ -94,7 +94,7 @@ class Base
     }
    
     // Функция для отправки запроса серверу
-    function write_smtp_response($socket, $msg) {
+    private static function write_smtp_response($socket, $msg) {
         $msg = $msg."\r\n";
         socket_write($socket, $msg, strlen($msg));
     }
