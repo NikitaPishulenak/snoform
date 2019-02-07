@@ -32,7 +32,7 @@ class User
     //  */
     public static function checkEmailExists($email, $countVal) {
         $result = Base::select("SELECT COUNT(*) AS count FROM user WHERE email ='$email'");
-        echo $result[0]['count'];
+        // echo $result[0]['count'];
         if($result[0]['count']==$countVal){
             return true;
         }else{
@@ -163,20 +163,9 @@ class User
     public static function getUserReports($idUser)
     {
         $idUser = intval($idUser);
-        $reports = Base::select("SELECT *  FROM reports WHERE id_user = ".$idUser." ORDER BY id_report  DESC");
+        $reports = Base::select("SELECT id_report, title_report, fio1, fio2 FROM reports WHERE id_user = ".$idUser." ORDER BY id_report  DESC");
         return $reports;
-        // $db = Db::getInstance()->getConnection(); 
-        // $sql = 'SELECT *  FROM reports WHERE id_user = :idUser ORDER BY id_report  DESC';
-
-        // // Получение и возврат результатов. Используется подготовленный запрос
-        // $result = $db->prepare($sql);
-        // $result->bindParam(':idUser', $idUser, PDO::PARAM_INT);
-
-        // // Указываем, что хотим получить данные в виде массива
-        // $result->setFetchMode(PDO::FETCH_ASSOC);
-        // $result->execute();
-        // // print_r($result);
-        // return $result->fetch();
+        
     }
 
     

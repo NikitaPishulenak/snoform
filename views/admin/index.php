@@ -1,28 +1,17 @@
-<?php include ROOT . '/views/layouts/header_admin.php'; ?>
+<?php include ROOT . '/views/layouts/header.php'; ?>
 
-<section>
-    <div class="container">
-        <div class="row">
-            
-            <br/>
-            
-            <h4>Добрый день, администратор <?php echo $_SESSION['name']; ?>!</h4>
-            
-            <br/>
-            
-            <p>Вам доступны такие возможности:</p>
-            
-            <br/>
-            
-            <ul>
-                <li><a href="/phpShop/admin/product">Управление товарами</a></li>
-                <li><a href="/phpShop/admin/category">Управление категориями</a></li>
-                <li><a href="/phpShop/admin/order">Управление заказами</a></li>
-            </ul>
-            
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Добрый день, администратор <?php echo $_SESSION['email']; ?>!</h3>
+            <div class="col">
+                <h4>Вам доступны такие возможности:</h4>
+                <div class="toolItem" id="downloadCSV"><a href="csv">Экспортировать .csv архив</a></div>
+                <div class="toolItem"><a href="rep">Просмотреть доклады</a></div>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
-<?php include ROOT . '/views/layouts/footer_admin.php'; ?>
+<?php include ROOT . '/views/layouts/footer.php'; ?>
 

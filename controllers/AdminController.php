@@ -8,10 +8,24 @@ class AdminController extends AdminBase
     {
         // Проверка доступа
         self::checkAdmin();
-        echo "админка";
 
-        // Подключаем вид
-        // require_once(ROOT . '/views/admin/index.php');
+        require_once(ROOT . '/views/admin/index.php');
+        return true;
+    }
+
+    public function actionDownloadCSV()
+    {
+        self::checkAdmin();
+        Report::getCSV();
+        return true;
+    }
+
+    public function actionShowReports()
+    {
+        self::checkAdmin();
+        $completedReports=Report::getReportsList();
+        require_once(ROOT . '/views/admin/showReports.php');
+        print_r($completedReports);
         return true;
     }
 

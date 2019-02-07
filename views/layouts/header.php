@@ -25,10 +25,9 @@
         <?php if(!User::isGuest()): ?>
             <div class="col-md-6 col-md-offset-3 menu">
                 <?php if(User::checkAdmin()): ?>
-                    <a href="cabinet"><i class='glyphicon glyphicon-certificate'></i> Админпанель</a>
-                <?php else: ?>
-                    <a href="cabinet"><i class='glyphicon glyphicon-user'></i> Кабинет</a>
+                    <a href="admin"><i class='glyphicon glyphicon-certificate'></i> Админпанель</a>
                 <?php endif; ?>
+                <a href="cabinet"><i class='glyphicon glyphicon-user'></i> Кабинет</a>
                 <a href="logout"><i class="glyphicon glyphicon-log-out"></i></i> Выход</a>
             </div>
         <?php endif; ?>

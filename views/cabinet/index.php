@@ -27,15 +27,4 @@
     </div>
 </div>
 
-<br><br><br>
-
-<!--         <div class="row"><br>
-            <div class="col-12">
-                
-            </div>
-            
-            
-                        
-        </div> -->
-
 <?php include ROOT . '/views/layouts/footer.php'; ?>

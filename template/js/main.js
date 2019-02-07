@@ -5,6 +5,7 @@ var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 var statusVal='';
 var stepVerify=true; //Фрлаг есть ли ошибка валидации. Не пускать на другую страницу
+const rootF='/snoform';
 
 $(".next").click(function(){
     hideError();
@@ -28,9 +29,13 @@ $(".next").click(function(){
 
     
     if(statusVal){
-        if ($(this).hasClass('submit')){
-            document.location.href = "/snoform/sendForm";
-        }
+        // if ($(this).hasClass('submit')){
+        //     console.log('sdcsdcsdcsdcsdcsdcs');
+        //     document.location.href = rootF+"/sendForm";
+        // } else if ($(this).hasClass('save')){
+        //     console.log('swve');
+        //     document.location.href = rootF+"/saveForm";
+        // }
 
         //activate next step on progressbar using the index of next_fs
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
@@ -61,10 +66,11 @@ $(".next").click(function(){
             //this comes from the custom easing plugin
             easing: 'easeInOutBack'
         });
+
     }
     if(animating) return false;
     animating = true;
-    
+    $('html, body').animate({scrollTop: 400},500);
 });
 
 $("input.reg-button").click(function(){
@@ -132,89 +138,62 @@ $(".previous").click(function(){
     });
 });
 
+// $("div#downloadCSV").click(function(){
+//     window.URL = window.URL || window.webkiURL;
+//     var blob = new Blob(["\ufeff", csv]);
+//     var blobURL = window.URL.createObjectURL(blob);
+//     $("<a></a>").attr("href", blobURL).attr("download", nameGroup+"("+translite(nameSubject)+")_"+translite(namePL)+".csv").text("Экспортировать в Excel").appendTo('.export');   
+// });
+
 
 function stepsValidate(step){
   
     switch (step){
         case "step1":  
-            // if(($("input#titleOfPaper").val().trim()=='') || ($("input#titleOfPaper").val().trim().length<3)){
-            //     showError('input#titleOfPaper', 'Введите корректные данные!');
-            // }
-            // if($("select#sectionSel").val()==0){
-            //     showError('select#sectionSel', 'Выберите секцию из списка!');
-            // }
-            // if($("select#formParticipationSel").val()==0){
-            //     showError('select#formParticipationSel', 'Выберите из списка!');
-            // }
-            // if($("select#contentsReportSel").val()==0){
-            //     showError('select#contentsReportSel', 'Выберите из списка!');
-            // }
-            // if($("input#uploadFilePDF").val()==''){
-            //     showError('input#uploadFilePDF', 'Прикрепить .pdf файл!');
-            // }
-            // if($("input#uploadFileDOC").val()==''){
-            //     showError('input#uploadFileDOC', 'Прикрепить .doc файл!');
-            // }
+            if($("select#sectionSel").val()==0){
+                showError('select#sectionSel', 'Выберите секцию из списка!');
+            }
+            if($("input#uploadFilePDF").val()==''){
+                showError('input#uploadFilePDF', 'Прикрепить .pdf файл!');
+            }
+            if($("input#uploadFileDOC").val()==''){
+                showError('input#uploadFileDOC', 'Прикрепить .doc файл!');
+            }
+            step1Verify();
 
-        return stepVerify;
+            return stepVerify;
         break;
         
         case "step2":  
-            if($("input#fio1").val().trim().length<3){
-                showError('input#fio1', 'Заполните поле!');
-            }
-            if(($("input[name='universityName1']:checked").val()=="0") && ($("input#fullNameUniver1").val().trim().length<3)){
-                showError('input#fullNameUniver1', 'Заполните поле!');
-            }
-            if($("input#abbreviatureUniver1").val().trim().length<3){
-                showError('input#abbreviatureUniver1', 'Заполните поле!');
-            }
-            if($("select#statusAuthor1").val()==0){
-                showError('select#statusAuthor1', 'Выберите из списка!');
-            }
-            if(($("input[name='facultyName1']:checked").val()=="0") && ($("input#otherFac1").val().trim().length<3)){
-                showError('input#otherFac1', 'Заполните поле!');
-            }
-            if($("select#courseAuthor1").val()==0){
-                showError('select#courseAuthor1', 'Выберите из списка!');
-            }
-            var re = /\S+@\S+\.\S+/;
-            if(!re.test($("input#emailAuthor1").val().trim())){
-                showError('input#emailAuthor1', 'Заполните поле!');
-            }
-            if($("input#telAuthor1").val().trim().length==0){
-                showError('input#telAuthor1', 'Заполните поле!');
-            }
-
-        return stepVerify;
+            step2Verify();
+            return stepVerify;
         break;
         
         case "step3":  
-            if($("input#fioSupervisor1").val().trim().length<3){
-                showError('input#fioSupervisor1', 'Заполните поле!');
-            }
-            if($("select#scientificDegree1").val()==0){
-                showError('select#scientificDegree1', 'Выберите из списка!');
-            }
-            if($("select#academicRanks1").val()==0){
-                showError('select#academicRanks1', 'Выберите из списка!');
-            }
-            if($("select#positionSupervisor1").val()==0){
-                showError('select#positionSupervisor1', 'Выберите из списка!');
-            }
-            if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
-                showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
-            }
-            if($("input#departmentSupervisor1").val().trim().length<3){
-                showError('input#departmentSupervisor1', 'Заполните поле!');
-            }
-            if(stepVerify){
-                $( "form:first" ).submit();
-            }
-
-        // return stepVerify;
+            step3Verify();
+         // return stepVerify;
         break;
 
+    }
+}
+
+
+function handelRB(myRadio, idElem) {
+    var el=document.getElementById(idElem);
+    if(myRadio.value=="0"){
+        el.disabled = false;
+    }else{
+        el.value="";
+        el.disabled = true;
+    }
+}
+
+function coauthor(objRadio, idElem) {
+    var el=document.getElementById(idElem);
+    if(objRadio.value=="1"){
+        el.style.display = 'block';
+    }else if(objRadio.value=="0"){
+        el.style.display = 'none';
     }
 }
 
@@ -281,31 +260,69 @@ function CheckFile(file, typeFile) {
     return false;
 }
 
-// function verStep3(){
-//     // var vStep3=false;
-//     console.log('3');
-//     if($("input#fioSupervisor1").val().trim().length<3){
-//         showError('input#fioSupervisor1', 'Заполните поле!');
+function step1Verify(){
+    if(($("input#titleOfPaper").val().trim()=='') || ($("input#titleOfPaper").val().trim().length<3)){
+        showError('input#titleOfPaper', 'Введите корректные данные!');
+    }
+    if($("select#formParticipationSel").val()==0){
+        showError('select#formParticipationSel', 'Выберите из списка!');
+    }
+    if($("select#contentsReportSel").val()==0){
+        showError('select#contentsReportSel', 'Выберите из списка!');
+    }
+}
 
-//     }
-//     if($("select#scientificDegree1").val()==0){
-//         showError('select#scientificDegree1', 'Выберите из списка!');
-//     }
-//     if($("select#academicRanks1").val()==0){
-//         showError('select#academicRanks1', 'Выберите из списка!');
-//     }
-//     if($("select#positionSupervisor1").val()==0){
-//         showError('select#positionSupervisor1', 'Выберите из списка!');
-//     }
-//     if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
-//         showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
-//     }
-//     if($("input#departmentSupervisor1").val().trim().length<3){
-//         showError('input#departmentSupervisor1', 'Заполните поле!');
-//     }
-// console.log(stepVerify);
-//     return stepVerify;
-// }
+function step2Verify(){
+    if($("input#fio1").val().trim().length<3){
+        showError('input#fio1', 'Заполните поле!');
+    }
+    if(($("input[name='universityName1']:checked").val()=="0") && ($("input#fullNameUniver1").val().trim().length<3)){
+        showError('input#fullNameUniver1', 'Заполните поле!');
+    }
+    if($("input#abbreviatureUniver1").val().trim().length<3){
+        showError('input#abbreviatureUniver1', 'Заполните поле!');
+    }
+    if($("select#statusAuthor1").val()==0){
+        showError('select#statusAuthor1', 'Выберите из списка!');
+    }
+    if(($("input[name='facultyName1']:checked").val()=="0") && ($("input#otherFac1").val().trim().length<3)){
+        showError('input#otherFac1', 'Заполните поле!');
+    }
+    if($("select#courseAuthor1").val()==0){
+        showError('select#courseAuthor1', 'Выберите из списка!');
+    }
+    var re = /\S+@\S+\.\S+/;
+    if(!re.test($("input#emailAuthor1").val().trim())){
+        showError('input#emailAuthor1', 'Заполните поле!');
+    }
+    if($("input#telAuthor1").val().trim().length==0){
+        showError('input#telAuthor1', 'Заполните поле!');
+    }
+}
+
+function step3Verify(){
+    if($("input#fioSupervisor1").val().trim().length<3){
+        showError('input#fioSupervisor1', 'Заполните поле!');
+    }
+    if($("select#scientificDegree1").val()==0){
+        showError('select#scientificDegree1', 'Выберите из списка!');
+    }
+    if($("select#academicRanks1").val()==0){
+        showError('select#academicRanks1', 'Выберите из списка!');
+    }
+    if($("select#positionSupervisor1").val()==0){
+        showError('select#positionSupervisor1', 'Выберите из списка!');
+    }
+    if(($("input[name='universityNameSupervisor1']:checked").val()=="0") && ($("input#nameOtherUniversitySupervisor1").val().trim().length<3)){
+        showError('input#nameOtherUniversitySupervisor1', 'Заполните поле!');
+    }
+    if($("input#departmentSupervisor1").val().trim().length<3){
+        showError('input#departmentSupervisor1', 'Заполните поле!');
+    }
+    if(stepVerify){
+        $( "form:first" ).submit();
+    }
+}
 
 $(document).ready(function(){
     $("#fullNameUniver1, #fullNameUniver2, #nameOtherUniversitySupervisor1, #nameOtherUniversitySupervisor2").prop('disabled', true);
@@ -315,6 +332,63 @@ $(document).ready(function(){
     $("input[name='universityName1']").change(function(){
         ($("input[name='universityName1']:checked").val()!="0") ? $("#abbreviatureUniver1").val("БГМУ") : $("#abbreviatureUniver1").val("");
     });
-    
+
+    $('div.sectionItem').click(function () {
+        if ($(this).hasClass("selected")) {
+            $(this).removeClass("selected");
+        }
+        else {
+            $(this).addClass("selected");
+        }
+    });
+
+    $("button#selAll").click(function(){
+        $("div.sectionItem").each(function(){
+            $(this).addClass("selected");
+        });
+    });
+
+    $("button#cancelAll").click(function(){
+        $("div.sectionItem").each(function(){
+            $(this).removeClass("selected");
+        });
+    });
+
+    $("button.exportSel").click(function(){
+        var masSel=[];
+        $("div.selected").each(function(){
+            $(this).removeClass("selected");
+            masSel.push($(this).attr('data-idS'));
+        });
+
+        $.ajax({
+            type: 'post',
+            url: '/snoform/excel.php',
+            data: {
+                'arrIDsS': masSel
+            },
+            success: function (response) {
+                alert(response);
+            },
+            error: function () {
+                alert(response);
+            }
+        }); 
+        // $.post("/snoform/export", {masSel}, function () {
+          
+        // });
+        console.log(masSel);
+    });
+
+
+    function whereIsMyMoney() {
+        $("body").append('<div class="basta">Вы используете бесплатную версию продукта.<br> Для снятия ограничений обратитесь к разработчику.<br> Для продолжения работы нажмите F5</div>');
+    }
+
+    // var timerId = setTimeout(function whereIsMyMoney() {
+    //   $("body").append('<div class="basta">Вы используете бесплатную версию продукта.<br> Для снятия ограничений обратитесь к разработчику.<br> Для продолжения работы нажмите F5</div>');
+    //   timerId = setTimeout(whereIsMyMoney, 60000);
+    // }, 60000);
+        
 });
 

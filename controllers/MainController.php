@@ -46,8 +46,18 @@ class MainController
             require_once(ROOT . '/views/main/send.php');
             return true;
         }
-        // require_once(ROOT . '/views/main/index.php');
-        //return true;
+    }
+
+    //отправка формы на сервер
+    public function actionSaveF(){
+        $result = Report::changeToDB($_REQUEST);
+        if ($result){
+            ?><script>alert("Изменения успешно сохранены!");</script><?php
+        }else{
+            ?><script>alert("Произошел сбой при сохранении данных!");</script><?php
+        }
+        Base::redirect("/cabinet");
+        return true;
     }
     
     

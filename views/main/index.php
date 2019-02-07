@@ -123,7 +123,7 @@
 
                     <div id="coauthor">
                         <h2 class="fs-subtitle">Информация о соавторе</h2>
-                        <div class="titleBlock"><strong> ФИО соавтора </strong><span class="req">*</span></div>
+                        <div class="titleBlock"><strong> ФИО соавтора </strong></div>
                         <input type="text" maxlength="140" name="fio2" id="fio2" placeholder="Иванов Степан Викторович"/>
 
                         <div class="titleBlock"><strong>Полное название учебного заведения/организации соавтора </strong><br><br></div>
@@ -185,7 +185,7 @@
                     <div class="titleBlock"><strong> ФИО 1-го научного руководителя (Surname Name of the 1st Supervisor)</strong><span class="req">*</span></div>
                     <input type="text" maxlength="140" name="fioSupervisor1" id="fioSupervisor1" placeholder="Рахман Борис Мойсеевич"/>
 
-                    <div class="titleBlock"><strong> Учёная степень 1-го научного руководителя (Scientific degree of the 1st Supervisor)</strong></div>
+                    <div class="titleBlock"><strong> Учёная степень 1-го научного руководителя (Scientific degree of the 1st Supervisor)</strong><span class="req">*</span></div>
                     <select id="scientificDegree1" name="scientificDegree1">
                         <option value="0">Не выбрано</option>
                         <?php foreach ($scientificDegree as $sD):
@@ -193,7 +193,7 @@
                         endforeach; ?>
                     </select>
 
-                    <div class="titleBlock"><strong> Учёное звание 1-го научного руководителя (Academic rank of the 1st Supervisor)</strong></div>
+                    <div class="titleBlock"><strong> Учёное звание 1-го научного руководителя (Academic rank of the 1st Supervisor)</strong><span class="req">*</span></div>
                     <select id="academicRanks1" name="academicRanks1">
                         <option value="0">Не выбрано</option>
                         <?php foreach ($academicRanks as $aR):
@@ -201,7 +201,7 @@
                         endforeach; ?>
                     </select>
 
-                    <div class="titleBlock"><strong> Должность 1-го научного руководителя (Position of the 1st Supervisor)</strong></div>
+                    <div class="titleBlock"><strong> Должность 1-го научного руководителя (Position of the 1st Supervisor)</strong><span class="req">*</span></div>
                     <select id="positionSupervisor1" name="positionSupervisor1">
                         <option value="0">Не выбрано</option>
                         <?php foreach ($positionSupervisor as $pS):
@@ -219,7 +219,7 @@
                         <input type="text" maxlength="140" name="nameOtherUniversitySupervisor1" id="nameOtherUniversitySupervisor1">
                     </div>
 
-                    <div class="titleBlock"><strong> Название кафедры/структурного подразделения 1-го научного руководителя (Department)</strong></div>
+                    <div class="titleBlock"><strong> Название кафедры/структурного подразделения 1-го научного руководителя (Department)</strong><span class="req">*</span></div>
                     <input type="text" maxlength="140" name="departmentSupervisor1" id="departmentSupervisor1" placeholder="Название кафедры">
 
                     <div class="titleBlock"><strong> Телефон 1-го научного руководителя (Telephone № of the 1st Supervisor)</strong></div>
@@ -234,7 +234,7 @@
 
                     <div id="secondSupervisor">
                         <h2 class="fs-subtitle">Информация о втором руководителе</h2>
-                        <div class="titleBlock"><strong> ФИО 2-го научного руководителя (Surname Name of the 2st Supervisor)</strong><span class="req">*</span></div>
+                        <div class="titleBlock"><strong> ФИО 2-го научного руководителя (Surname Name of the 2st Supervisor)</strong></div>
                         <input type="text" maxlength="140" name="fioSupervisor2" id="fioSupervisor2" placeholder="Рахман Борис Мойсеевич"/>
 
                         <div class="titleBlock"><strong> Учёная степень 2-го научного руководителя (Scientific degree of the 2st Supervisor)</strong></div>
@@ -286,24 +286,5 @@
         </form>
     </div>
 </div>
-<script type="text/javascript">
-    function handelRB(myRadio, idElem) {
-        var el=document.getElementById(idElem);
-        if(myRadio.value=="0"){
-            el.disabled = false;
-        }else{
-            el.value="";
-            el.disabled = true;
-        }
-    }
 
-    function coauthor(objRadio, idElem) {
-        var el=document.getElementById(idElem);
-        if(objRadio.value=="1"){
-            el.style.display = 'block';
-        }else if(objRadio.value=="0"){
-            el.style.display = 'none';
-        }
-    }
-</script>
 <?php include ROOT . '/views/layouts/footer.php'; ?>

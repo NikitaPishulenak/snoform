@@ -57,7 +57,7 @@ class UserController
                     if($result){
                         $userId=User::checkUserData($email, $password1);
 
-                        $msg='Здравствуйте!<br>Вы успешно зарегистрировались на сайте <a href="'.$_SERVER['HTTP_HOST'].'">'.$_SERVER['HTTP_HOST'].'</a><br><strong>Логин:</strong><span>'.$email.'</span><br><strong>Пароль:</strong><span>'.$password1.'</span><br><br><em>С уважением, руководство СНО БГМУ.</em>';
+                        $msg='Здравствуйте!<br>Вы успешно зарегистрировались на сайте '.$_SERVER['HTTP_HOST'].'<br><strong>Логин:</strong><span>'.$email.'</span><br><strong>Пароль:</strong><span>'.$password1.'</span><br><br><em>С уважением, руководство СНО БГМУ.</em>';
                         Base::sendMail($email, $msg);
 
                         User::auth($userId);
