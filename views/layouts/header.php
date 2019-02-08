@@ -19,7 +19,7 @@
     <body>
     <header id="header">
         <div class="col-md-12">
-            <img src="<?php echo rootFolder;?>/template/images/banner.jpg" alt="баннер">
+            <img src="<?php echo rootFolder;?>/template/images/banner.png" alt="баннер"><hr>
         </div>
 
         <?php if(!User::isGuest()): ?>

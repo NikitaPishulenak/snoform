@@ -8,7 +8,7 @@ abstract class AdminBase{
         if($user['role']=="admin"){
             return true;
         }else{
-            // die('Access denied');
+            die('Access denied');
         }
     }
 }

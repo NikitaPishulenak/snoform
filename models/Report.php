@@ -55,7 +55,7 @@ class Report extends Base
                 $sectionFolder = $resultFolder[0]['name_sectionName'];
                 $file['name'] = $file_name;
                 move_uploaded_file($file['tmp_name'], ROOT."/reports/" . $sectionFolder . "/" . $file['name']);
-                return true;
+                return $file_name; //true
             } else {
                 return false;
             }
@@ -70,8 +70,8 @@ class Report extends Base
         // print_r($array);
         $fioName=($array['fio2']) ? $array['fio1']."-".$array['fio2'] : $array['fio1'];
         $fioName=Base::translit($fioName);
-    	self::saveFile($_FILES['reportFilePDF'], 1, '.pdf', $fioName, $array['sectionSel']);
-        self::saveFile($_FILES['reportFileDOC'], 1, '.doc', $fioName, $array['sectionSel']);
+    	$fPDF=self::saveFile($_FILES['reportFilePDF'], 1, '.pdf', $fioName, $array['sectionSel']);
+        $fDOC=self::saveFile($_FILES['reportFileDOC'], 1, '.doc', $fioName, $array['sectionSel']);
         
         $db = Db::getInstance()->getConnection(); 
         
@@ -83,8 +83,8 @@ class Report extends Base
         $result->bindParam(':id_user', $_SESSION['user'], PDO::PARAM_INT);
         $result->bindParam(':title_report', $array['titleOfPaper'], PDO::PARAM_STR);
         
-        $fPDF=$fioName.'.pdf';
-        $fDOC=$fioName.'.doc';
+        // $fPDF=$fioName.'.pdf';
+        // $fDOC=$fioName.'.doc';
         
         $result->bindParam(':reportFilePDF', $fPDF, PDO::PARAM_STR);
         $result->bindParam(':reportFileDOC', $fDOC, PDO::PARAM_STR);

@@ -25,7 +25,6 @@ class AdminController extends AdminBase
         self::checkAdmin();
         $completedReports=Report::getReportsList();
         require_once(ROOT . '/views/admin/showReports.php');
-        print_r($completedReports);
         return true;
     }
 

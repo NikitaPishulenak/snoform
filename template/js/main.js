@@ -361,23 +361,29 @@ $(document).ready(function(){
             masSel.push($(this).attr('data-idS'));
         });
 
-        $.ajax({
-            type: 'post',
-            url: '/snoform/excel.php',
-            data: {
-                'arrIDsS': masSel
-            },
-            success: function (response) {
-                alert(response);
-            },
-            error: function () {
-                alert(response);
-            }
-        }); 
-        // $.post("/snoform/export", {masSel}, function () {
-          
-        // });
-        console.log(masSel);
+        if(masSel.length>0){
+            $.ajax({
+                type: 'post',
+                url: 'export.php',
+                data: {
+                    'arrIDsS': masSel
+                },
+                success: function (response) {
+                    console.log(response);
+                    $('div.basta').remove();
+                },
+                beforeSend:function () {
+                    $("body").append('<div class="basta"><img src="/snoform/template/images/loading1.gif" class="loading_img"></div>');                },
+                error: function () {
+                    $('div.basta').remove();
+                    alert("Что-то пошло не так.");
+                }
+            }); 
+        }else{
+            alert("Сначала выбери секцию.");
+        }
+
+        
     });
 
 
