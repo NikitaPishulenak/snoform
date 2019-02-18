@@ -17,7 +17,6 @@ class CabinetController
     }
 
    
-    
 
     public function actionEditForm($idReport){
         if(!User::checkLogged()){
@@ -54,6 +53,18 @@ class CabinetController
         $academicRanks = Teatcher::getAcademicRanksList();
         $positionSupervisor = Teatcher::getPositionSupervisorList();
         require_once(ROOT . '/views/cabinet/edit.php');
+        return true;
+    }
+
+    public function actionDelete($idReport){
+        if(!User::checkLogged()){
+            Base::redirect("/enter");
+            exit;
+        }else if(!Report::isOwner($idReport)){
+            Base::redirect("/cabinet");
+            exit;
+        }
+        Report::delReport($idReport);
         return true;
     }
         

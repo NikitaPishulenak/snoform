@@ -11,14 +11,18 @@
                 <?php else: ?>
                     <?php foreach ($userReports as $report):?>
                         <div class="reportItem">
-                            <strong><?php echo $report['title_report']; ?></strong><br>
+                            <strong class="titleR"><?php echo $report['title_report']; ?>&nbsp; <em>(<?php echo $report['s_name']; ?>)</em></strong><br>
                             <em class="author"><?php echo $report['fio1']; ?></em><br>
                             <?php if (!empty($report['fio2'])): ?>
                                 <em class="author"><?php echo $report['fio2']; ?></em>
                             <?php endif; ?>
-                            <div class="edt"><a href="<?php echo rootFolder;?>/cabinet/edit/<?php echo  $report['id_report'];?>"><i class='glyphicon glyphicon-edit'></i></a></div>
+                            <div class="edt">
+                                <a href="<?php echo rootFolder;?>/cabinet/edit/<?php echo  $report['id_report'];?>" title="редактировать"><i class='glyphicon glyphicon-edit'></i></a>
+                                <a data-idReport="<?php echo  $report['id_report'];?>" href="#" title="удалить" class="delReport"><i class='glyphicon glyphicon glyphicon-trash'></i></a>
+                            </div>
                         </div>
-                    <?php endforeach; ?>                              
+                    <?php endforeach; ?>    
+                    <div class="marg">&nbsp;</div>                          
                 <?php endif; ?>
                 <br/>
                 <br/>

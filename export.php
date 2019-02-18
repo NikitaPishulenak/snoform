@@ -3,25 +3,42 @@ define('ROOT', dirname(__FILE__));
 require_once(ROOT.'/components/Autoload.php');
 
 $pathData="reports/DATA";
-$arraySections=$_POST['arrIDsS'];
+
+$arraySectionsSts=$_GET['arr'];
+
+$nameSecList=array();
+$nameFiles=array();
+
+// echo gettype ( $arraySectionsSts);
+$arraySections = explode(",", $arraySectionsSts);
 if (is_dir($pathData))
 {
     dirDel($pathData);
-    mkdir($pathData, 0777, true);
 }
+mkdir($pathData, 0777, true);
+
+//массив с названием всех секций
+$nameSecList=Base::select("SELECT id_sectionName, name_sectionName FROM sectionsName"); 
+
+//массив со всеми докладами
+$nameFiles=Base::select("SELECT id_sections, reportFilePDF, reportFileDOC FROM reports WHERE  id_sections IN ($arraySectionsSts) and del=0 ORDER BY id_sections ASC ");
+
+//цикл создания папок
 foreach ($arraySections as $idS) {
-    $nameSec=Base::select("SELECT name_sectionName FROM sectionsName WHERE id_sectionName = '$idS'"); 
-    mkdir($pathData."/".$nameSec[0]['name_sectionName'], 0777, true);
-    $nameFiles=Base::select("SELECT reportFilePDF, reportFileDOC FROM reports WHERE  id_sections = '$idS'");
-    foreach ($nameFiles as $k => $curRep) {
-        $curFol="reports/".$nameSec[0]['name_sectionName']."/";
-        // echo $curFol.$nameFiles[$k]['reportFilePDF'];
-        if (file_exists($curFol.$nameFiles[$k]['reportFilePDF'])) {
-            copy($curFol.$nameFiles[$k]['reportFilePDF'], 'reports/DATA/'.$nameSec[0]['name_sectionName'].'/'.$nameFiles[$k]['reportFilePDF']);
-        }
-        if (file_exists($curFol.$nameFiles[$k]['reportFileDOC'])) {
-            copy($curFol.$nameFiles[$k]['reportFileDOC'], 'reports/DATA/'.$nameSec[0]['name_sectionName'].'/'.$nameFiles[$k]['reportFileDOC']);
-        }
+    $nameSec=$nameSecList[$idS-1]['name_sectionName'];
+    mkdir($pathData."/".$nameSec, 0777, true);
+}
+
+
+foreach ($nameFiles as $nF) {
+    // print_r($nF);
+    $curFol="reports/".$nameSecList[$nF[id_sections]-1]['name_sectionName']."/";
+    // echo $curFol.'<br>';
+    if (file_exists($curFol.$nF['reportFilePDF'])) {
+        copy($curFol.$nF['reportFilePDF'], 'reports/DATA/'.$nameSecList[$nF[id_sections]-1]['name_sectionName'].'/'.$nF['reportFilePDF']);
+    }
+    if (file_exists($curFol.$nF['reportFileDOC'])) {
+        copy($curFol.$nF['reportFileDOC'], 'reports/DATA/'.$nameSecList[$nF[id_sections]-1]['name_sectionName'].'/'.$nF['reportFileDOC']);
     }
 }
 
@@ -31,14 +48,13 @@ Zip($path.'reports/DATA/', $path.'reports/zip1.zip');
 
 if(file_exists($path.'reports/zip1.zip'))
 {
+    $zipName="Archive-".time().".zip";
     header('Content-type: application/zip');
-    header('Content-Disposition: attachment; filename="'.$zip_name.'"');
+    header('Content-Disposition: attachment; filename="'.$zipName.'"');
 
     readfile($zip_name);
     unlink($zip_name);
 }
-
-
 
 
 function Zip($source, $destination){

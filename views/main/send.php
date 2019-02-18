@@ -8,7 +8,7 @@
             <h4>В течение суток по электронной почте Вы получите подтверждение того, что Ваши тезисы получены и направлены на рассмотрение.</h4>
         </div>
         <div>
-        	<h4 class="blueColor">LXXI АПСМиФ <?php echo date('Y'); ?></h4>
+        	<h4 class="blueColor">LXXIII АПСМиФ <?php echo date('Y'); ?></h4>
             <h4 class="blueColor">Оргкомитет</h4>
         </div>
         <div>
@@ -41,25 +41,24 @@
             <h4>During the day you will receive the e-mail-confirmation that your abstract prepared and submitted for consideration.</h4>
         </div>
         <div>
-        	<h4 class="blueColor">LXXI APMM&Ph <?php echo date('Y'); ?></h4>
+        	<h4 class="blueColor">LXXIII APMM&Ph <?php echo date('Y'); ?></h4>
             <h4 class="blueColor">Organizing Committee</h4>
         </div>
         <div>
         	<h3 class="blueColor">CONTACTS:</h3>
                 <strong class="colorInfo">Chairman of Student Scientific Society of BSMU</strong><br>
                     Davidyan Artur Valerievich<br>
-                    Телефон: +375-29-980-53-08<br><br>
+                    Phone: +375-29-980-53-08<br><br>
 
-                    <strong class="colorInfo">Deputy chairman of the </strong><br>
-                    Student Scientific Society of BSMU on information-publishing and organizational work<br>
+                    <strong class="colorInfo">Vice-Chairman </strong><br>
+                    of SSS of BSMU<br>
                     Podgolina Alena Aleksandrovna<br>
-                    Телефон: +375-29-586-46-54<br><br>
+                    Phone: +375-29-586-46-54<br><br>
 
-                    <strong class="colorInfo">Chief</strong><br>
-                    of the Department of inter-institutional relations<br>
-                    of the Council of Student Scientific Society of BSMU<br>
+                    <strong class="colorInfo">Vice-Chairman </strong><br>
+                    of the SSS for intra-University and inter-University communications<br>
                     Pristrom Igor Yuryevich<br>
-                    Телефон: +375-44-553-44-91<br><br>
+                    Phone: +375-44-553-44-91<br><br>
 
                     <em>http://sno.bsmu.by<br>
                     E-mail: sno@bsmu.by<br>

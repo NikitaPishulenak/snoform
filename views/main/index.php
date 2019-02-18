@@ -11,6 +11,10 @@
                 
                 <h2 class="fs-title">Доклад</h2>
                 <h3 class="fs-subtitle">Информация о докладе</h3>
+                <div class="col downloadRule">
+                    <a href="/snoform/reports/rule.pdf" download>Правила оформления тезисов</a><br>
+                    <a href="/snoform/reports/template.doc" download>Шаблон оформления тезисов</a>
+                </div>
                 <div class="contentF" >
                     <div class="titleBlock"><strong> Название работы (Title of Paper)</strong><span class="req">*</span></div>
                     <input type="text" maxlength="140" name="titleOfPaper" id="titleOfPaper" placeholder="Лечение хронического холецистита"/>
@@ -111,7 +115,7 @@
                         <option value=".by" selected>+375</option>
                         <option value=".ru">+7</option>
                     <input type="text" id="phoneNumber" /> -->
-                    <input type="text" name="telAuthor1" id="telAuthor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                    +&nbsp;<input autocomplete="off" type="text" name="telAuthor1" id="telAuthor1" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12" />
 
                     <div class="titleBlock"><strong> У вас есть соавтор?</strong></div>
                     <div class="marg"></div>
@@ -169,7 +173,7 @@
                         <input type="email"  maxlength="140" name="emailAuthor2" id="emailAuthor2" placeholder="example@exam.ru" />
 
                         <div class="titleBlock"><strong> Телефон соавтора </strong></div>
-                        <input type="text" name="telAuthor2" id="telAuthor2" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                        +&nbsp;<input autocomplete="off" type="text" name="telAuthor2" id="telAuthor2" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12"/>
 
                     </div>
 
@@ -223,7 +227,7 @@
                     <input type="text" maxlength="140" name="departmentSupervisor1" id="departmentSupervisor1" placeholder="Название кафедры">
 
                     <div class="titleBlock"><strong> Телефон 1-го научного руководителя (Telephone № of the 1st Supervisor)</strong></div>
-                    <input type="text" name="telSupervisor1" id="telSupervisor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                    +&nbsp;<input autocomplete="off" type="text" name="telSupervisor1" id="telSupervisor1" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12"/>
                     <div class="titleBlock"><strong> У вас есть второй научныйруководитель?</strong></div>
                     <div class="marg"></div>
                     <div class="left">
@@ -275,7 +279,7 @@
                         <input type="text" maxlength="140" name="departmentSupervisor2" id="departmentSupervisor2" placeholder="Название кафедры">
 
                         <div class="titleBlock"><strong> Телефон 2-го научного руководителя (Telephone № of the 2st Supervisor)</strong></div>
-                        <input type="text" name="telSupervisor2" id="telSupervisor2" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                        +&nbsp;<input autocomplete="off" type="text" name="telSupervisor2" id="telSupervisor2" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12"/>
 
                     </div>
 

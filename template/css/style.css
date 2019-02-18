@@ -313,7 +313,7 @@ div.menu a{
 div.reportItem{
     border: solid #bae4fd 2px;
     min-height: 100px;
-    padding: 10px;
+    padding: 17px 10px 10px 10px;
     margin: 5px;
     float: left;
     width: 100%;
@@ -359,14 +359,18 @@ div.edt{
     position: absolute;
     top: 4px;
     right: 4px;
-    font-size: 13px;
+}
+
+div.edt a{
+    padding: 2px 5px;
+    font-size: 15px;
     color: #3b91d4;
 }
 
-div.edt:hover{
+div.edt a:hover{
     font-size: 15px;
     cursor: pointer;
-    color: #337ab7;
+    color: #ad1321;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
@@ -389,31 +393,33 @@ div.toolItem{
     padding: 5px;
     font-size: 20px;
 }
-
-button{
-    height: 40px;
-    padding: 8px;
-    margin: 5px;
-    font-weight: 600;
-    color: #fff;
-    background: #33648e;
-    outline: none;
+a.btn{
+    margin: 3px;
+}
+input.tel{
+    width: calc(100% - 15px);
 }
 
-div.basta{
-    position: fixed; 
-    z-index: 100; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(220,220,220,0.8);
-    text-align: center;
-    padding: 30% 10%;
-    font-size: 25px;
-    color: #a90606;
-    font-weight: 600;
+div.downloadRule{
+    max-width: 250px;
+    border-left: solid #8c0000 4px;
+    margin: 0 auto;
+    text-align: left;
+    padding-left: 10px;
+    margin-bottom: 15px;
 }
 
-.modal{position: fixed; z-index: 100; top: 0; left: 0; width: 100%; height: 100%; background: rgba(220,220,220,0.6);}
-.loading_img {position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+div.downloadRule a{
+    margin: 3px;
+    color: #333;
+}
+
+div.marg{
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 500px){
+    div.menu a{
+        display: block;
+    }
+}

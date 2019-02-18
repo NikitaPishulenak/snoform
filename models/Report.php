@@ -47,14 +47,14 @@ class Report extends Base
             if ($file['size'] <= $size * 1024 * 1024) {
             	$i=1;
             	$file_name = $name . $typeFile;
-            	while(file_exists ( ROOT."/reports/" .$file_name)){
+                $resultFolder = Base::select("SELECT name_sectionName FROM sectionsName WHERE id_sectionName=".$idSection);
+                $sectionFolder = $resultFolder[0]['name_sectionName'];
+            	while(file_exists ( ROOT."/reports/".$sectionFolder. "/" .$file_name)){
             		$file_name = $name ."(". $i .")". $typeFile;
             		$i++;
             	}
-                $resultFolder = Base::select("SELECT name_sectionName FROM sectionsName WHERE id_sectionName=".$idSection);
-                $sectionFolder = $resultFolder[0]['name_sectionName'];
-                $file['name'] = $file_name;
-                move_uploaded_file($file['tmp_name'], ROOT."/reports/" . $sectionFolder . "/" . $file['name']);
+                
+                move_uploaded_file($file['tmp_name'], ROOT."/reports/" . $sectionFolder . "/" . $file_name);
                 return $file_name; //true
             } else {
                 return false;
@@ -76,15 +76,12 @@ class Report extends Base
         $db = Db::getInstance()->getConnection(); 
         
 
-        $sql = 'INSERT INTO reports (id_user, title_report, reportFilePDF, reportFileDOC, id_sections, id_formParticipation, id_contentReport, fio1, universityName1, abbreviatureUniver1, statusAuthor1, facultyName1, courseAuthor1, emailAuthor1, telAuthor1, haveSecondAuthor, fio2, universityName2, abbreviatureUniver2, statusAuthor2, facultyName2, courseAuthor2, emailAuthor2, telAuthor2, fioSupervisor1, scientificDegree1, academicRanks1, positionSupervisor1, universityNameSupervisor1, departmentSupervisor1, telSupervisor1, haveSecondSup, fioSupervisor2, scientificDegree2, academicRanks2, positionSupervisor2, universityNameSupervisor2, departmentSupervisor2, telSupervisor2) '
-                . 'VALUES (:id_user, :title_report, :reportFilePDF, :reportFileDOC, :id_sections, :id_formParticipation, :id_contentReport, :fio1, :universityName1, :abbreviatureUniver1, :statusAuthor1, :facultyName1, :courseAuthor1, :emailAuthor1, :telAuthor1, :haveSecondAuthor, :fio2, :universityName2, :abbreviatureUniver2, :statusAuthor2, :facultyName2, :courseAuthor2, :emailAuthor2, :telAuthor2, :fioSupervisor1, :scientificDegree1, :academicRanks1, :positionSupervisor1, :universityNameSupervisor1, :departmentSupervisor1, :telSupervisor1, :haveSecondSup, :fioSupervisor2, :scientificDegree2, :academicRanks2, :positionSupervisor2, :universityNameSupervisor2, :departmentSupervisor2, :telSupervisor2)';
+        $sql = 'INSERT INTO reports (id_user, title_report, del, reportFilePDF, reportFileDOC, id_sections, id_formParticipation, id_contentReport, fio1, universityName1, abbreviatureUniver1, statusAuthor1, facultyName1, courseAuthor1, emailAuthor1, telAuthor1, haveSecondAuthor, fio2, universityName2, abbreviatureUniver2, statusAuthor2, facultyName2, courseAuthor2, emailAuthor2, telAuthor2, fioSupervisor1, scientificDegree1, academicRanks1, positionSupervisor1, universityNameSupervisor1, departmentSupervisor1, telSupervisor1, haveSecondSup, fioSupervisor2, scientificDegree2, academicRanks2, positionSupervisor2, universityNameSupervisor2, departmentSupervisor2, telSupervisor2, dtR) '
+                . 'VALUES (:id_user, :title_report, "0", :reportFilePDF, :reportFileDOC, :id_sections, :id_formParticipation, :id_contentReport, :fio1, :universityName1, :abbreviatureUniver1, :statusAuthor1, :facultyName1, :courseAuthor1, :emailAuthor1, :telAuthor1, :haveSecondAuthor, :fio2, :universityName2, :abbreviatureUniver2, :statusAuthor2, :facultyName2, :courseAuthor2, :emailAuthor2, :telAuthor2, :fioSupervisor1, :scientificDegree1, :academicRanks1, :positionSupervisor1, :universityNameSupervisor1, :departmentSupervisor1, :telSupervisor1, :haveSecondSup, :fioSupervisor2, :scientificDegree2, :academicRanks2, :positionSupervisor2, :universityNameSupervisor2, :departmentSupervisor2, :telSupervisor2, CURRENT_TIMESTAMP())';
         
         $result = $db->prepare($sql);
         $result->bindParam(':id_user', $_SESSION['user'], PDO::PARAM_INT);
         $result->bindParam(':title_report', $array['titleOfPaper'], PDO::PARAM_STR);
-        
-        // $fPDF=$fioName.'.pdf';
-        // $fDOC=$fioName.'.doc';
         
         $result->bindParam(':reportFilePDF', $fPDF, PDO::PARAM_STR);
         $result->bindParam(':reportFileDOC', $fDOC, PDO::PARAM_STR);
@@ -146,13 +143,13 @@ class Report extends Base
         $result->bindParam(':telSupervisor2', $array['telSupervisor2'], PDO::PARAM_STR);
 
         if($result){
-            $msg="<div><div><div><h2>Уважаемый участник!<br>Поздравляем! Вы прошли регистрацию!</h2><h4>В течение суток по электронной почте Вы получите подтверждение того, что Ваши тезисы получены и направлены на рассмотрение.</h4></div><div><h4>LXXI АПСМиФ 2019 </h4><h4>Оргкомитет</h4></div><div><h3>КОНТАКТЫ:</h3><strong>Председатель СНО БГМУ</strong><br>Давидян Артур Валерьевич<br>
+            $msg="<div><div><div><h2>Уважаемый участник!<br>Поздравляем! Вы прошли регистрацию!</h2><h4>В течение суток по электронной почте Вы получите подтверждение того, что Ваши тезисы получены и направлены на рассмотрение.</h4></div><div><h4>LXXIII АПСМиФ 2019 </h4><h4>Оргкомитет</h4></div><div><h3>КОНТАКТЫ:</h3><strong>Председатель СНО БГМУ</strong><br>Давидян Артур Валерьевич<br>
                     Телефон: +375-29-980-53-08<br><br><strong>Заместитель председателя СНО БГМУ </strong><br>
                     по информационно-издательской и организационной работе<br> Подголина Алена Александровна<br>Телефон: +375-29-586-46-54<br><br><strong>Заместитель председателя СНО БГМУ </strong><br>
                     по внутривузовским и межуниверситетским коммуникациям<br>Пристром Игорь Юрьевич<br>Телефон: +375-44-553-44-91<br><br>
                     <em>http://sno.bsmu.by<br>E-mail: sno@bsmu.by<br>220116, г. Минск, Республика Беларусь, пр-т. Дзержинского, 83,<br>
                     учреждение образования «Белорусский государственный медицинский университет»,<br>Совет Студенческого научного общества</em></div></div>
-                    <div><div><h2>Dear participant!<br>Congratulations! You have been registered!</h2><h4>During the day you will receive the e-mail-confirmation that your abstract prepared and submitted for consideration.</h4></div><div><h4>LXXI APMM&Ph 2019 </h4><h4>Organizing Committee</h4></div><div><h3>CONTACTS:</h3><strong>Chairman of Student Scientific Society of BSMU</strong><br>Davidyan Artur Valerievich<br>Телефон: +375-29-980-53-08<br><br><strong>Deputy chairman of the </strong><br>Student Scientific Society of BSMU on information-publishing and organizational work<br>Podgolina Alena Aleksandrovna<br>Телефон: +375-29-586-46-54<br><br><strong>Chief</strong><br>of the Department of inter-institutional relations<br>of the Council of Student Scientific Society of BSMU<br>Pristrom Igor Yuryevich<br>Телефон: +375-44-553-44-91<br><br><em>http://sno.bsmu.by<br>E-mail: sno@bsmu.by<br>220116, Minsk, Republic of Belarus, Dzerzhinsky Av. 83,<br>Belarusian State Medical University,<br>Council of Student Scientific Society</em></div></div></div>";
+                    <div><div><h2>Dear participant!<br>Congratulations! You have been registered!</h2><h4>During the day you will receive the e-mail-confirmation that your abstract prepared and submitted for consideration.</h4></div><div><h4>LXXIII APMM&Ph 2019 </h4><h4>Organizing Committee</h4></div><div><h3>CONTACTS:</h3><strong>Chairman of Student Scientific Society of BSMU</strong><br>Davidyan Artur Valerievich<br>Phone: +375-29-980-53-08<br><br><strong>Vice-Chairman</strong><br>of SSS of BSMU<br>Podgolina Alena Aleksandrovna<br>Phone: +375-29-586-46-54<br><br><strong>Vice-Chairman </strong><br>of the SSS for intra-University and inter-University communications<br>Pristrom Igor Yuryevich<br>Pristrom Igor Yuryevich<br>Phone: +375-44-553-44-91<br><br><em>http://sno.bsmu.by<br>E-mail: sno@bsmu.by<br>220116, Minsk, Republic of Belarus, Dzerzhinsky Av. 83,<br>Belarusian State Medical University,<br>Council of Student Scientific Society</em></div></div></div>";
             $emails=array();
             if((isset($array['emailAuthor2'])) && (!empty($array['emailAuthor1']))){
                 array_push($emails, $array['emailAuthor2'], $array['emailAuthor1']);
@@ -233,7 +230,8 @@ class Report extends Base
                 positionSupervisor2 = :positionSupervisor2,
                 universityNameSupervisor2 = :universityNameSupervisor2,
                 departmentSupervisor2 = :departmentSupervisor2,
-                telSupervisor2 = :telSupervisor2
+                telSupervisor2 = :telSupervisor2,
+                dtR = CURRENT_TIMESTAMP()
             WHERE id_report = :id';
                
         $result = $db->prepare($sql);
@@ -286,7 +284,7 @@ class Report extends Base
         $csv_str .= "\r\n";
 
         $arrData = array();
-        $arrData=Base::select("SELECT title_report, fio1, universityName1, abbreviatureUniver1, (SELECT S.name_status FROM statuses AS S WHERE S.id_status=R.statusAuthor1), facultyName1, (SELECT C.name_course FROM courses AS C WHERE C.id_course=R.courseAuthor1), emailAuthor1, telAuthor1, fio2, universityName2, abbreviatureUniver2, (SELECT S.name_status FROM statuses AS S WHERE S.id_status=R.statusAuthor2), facultyName2, (SELECT C.name_course FROM courses AS C WHERE C.id_course=R.courseAuthor2), emailAuthor2, telAuthor2, fioSupervisor1, (SELECT SD.name_scientificDegree FROM scientificDegree AS SD WHERE SD.id_scientificDegree=R.scientificDegree1), (SELECT AR.name_academicRanks FROM academicRanks AS AR WHERE AR.id_academicRanks=R.academicRanks1), (SELECT PS.name_positionSupervisor FROM positionSupervisor AS PS WHERE PS.id_positionSupervisor=R.positionSupervisor1), universityNameSupervisor1, departmentSupervisor1, telSupervisor1, fioSupervisor2, (SELECT SD.name_scientificDegree FROM scientificDegree AS SD WHERE SD.id_scientificDegree=R.scientificDegree2), (SELECT AR.name_academicRanks FROM academicRanks AS AR WHERE AR.id_academicRanks=R.academicRanks2), (SELECT PS.name_positionSupervisor FROM positionSupervisor AS PS WHERE PS.id_positionSupervisor=R.positionSupervisor2), universityNameSupervisor2, departmentSupervisor2, telSupervisor2, (SELECT SEC.name_section FROM sections AS SEC WHERE SEC.id_section=R.id_sections), (SELECT FP.name_formParticipation FROM formParticipation AS FP WHERE FP.id_formParticipation=R.id_formParticipation), (SELECT CR.name_contentsReport FROM contentsReport AS CR WHERE CR.id_contentsReport=R.id_contentReport) FROM reports AS R ORDER BY id_report ASC");
+        $arrData=Base::select("SELECT title_report, fio1, universityName1, abbreviatureUniver1, (SELECT S.name_status FROM statuses AS S WHERE S.id_status=R.statusAuthor1), facultyName1, (SELECT C.name_course FROM courses AS C WHERE C.id_course=R.courseAuthor1), emailAuthor1, telAuthor1, fio2, universityName2, abbreviatureUniver2, (SELECT S.name_status FROM statuses AS S WHERE S.id_status=R.statusAuthor2), facultyName2, (SELECT C.name_course FROM courses AS C WHERE C.id_course=R.courseAuthor2), emailAuthor2, telAuthor2, fioSupervisor1, (SELECT SD.name_scientificDegree FROM scientificDegree AS SD WHERE SD.id_scientificDegree=R.scientificDegree1), (SELECT AR.name_academicRanks FROM academicRanks AS AR WHERE AR.id_academicRanks=R.academicRanks1), (SELECT PS.name_positionSupervisor FROM positionSupervisor AS PS WHERE PS.id_positionSupervisor=R.positionSupervisor1), universityNameSupervisor1, departmentSupervisor1, telSupervisor1, fioSupervisor2, (SELECT SD.name_scientificDegree FROM scientificDegree AS SD WHERE SD.id_scientificDegree=R.scientificDegree2), (SELECT AR.name_academicRanks FROM academicRanks AS AR WHERE AR.id_academicRanks=R.academicRanks2), (SELECT PS.name_positionSupervisor FROM positionSupervisor AS PS WHERE PS.id_positionSupervisor=R.positionSupervisor2), universityNameSupervisor2, departmentSupervisor2, telSupervisor2, (SELECT SEC.name_section FROM sections AS SEC WHERE SEC.id_section=R.id_sections), (SELECT FP.name_formParticipation FROM formParticipation AS FP WHERE FP.id_formParticipation=R.id_formParticipation), (SELECT CR.name_contentsReport FROM contentsReport AS CR WHERE CR.id_contentsReport=R.id_contentReport) FROM reports AS R WHERE R.del=0 ORDER BY id_report ASC");
         
         foreach ($arrData as $arrD){
             foreach ($arrD as $key => $val) {
@@ -295,7 +293,7 @@ class Report extends Base
             $csv_str .= "\r\n";
         }
         $file = fopen("reports/".$file_name, "w+");
-        $csv_str= mb_convert_encoding($csv_str, "windows-1251", "utf-8");
+        // $csv_str= mb_convert_encoding($csv_str, "windows-1251", "utf-8");
         fwrite($file, trim($csv_str)); 
         fclose($file);
         header('Content-type: application/csv');
@@ -310,8 +308,22 @@ class Report extends Base
     public static function getReportsList()
     {
         $repList = array();
-        $repList = Base::select("SELECT id_sections, (SELECT name_section FROM sections AS S WHERE S.id_section=R.id_sections) AS sName, COUNT(*) AS C FROM reports AS R GROUP BY id_sections ORDER BY sName ASC");
+        $repList = Base::select("SELECT id_sections, (SELECT name_section FROM sections AS S WHERE S.id_section=R.id_sections) AS sName, COUNT(*) AS C FROM reports AS R WHERE R.del=0 GROUP BY id_sections ORDER BY sName ASC");
         return $repList;
     }
+
+    public static function delReport($idReport) {
+        $db = Db::getInstance()->getConnection(); 
+        
+        $sql = 'UPDATE reports
+            SET 
+                del = "1"
+            WHERE id_report = :id';
+               
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $idReport, PDO::PARAM_INT);
+       return $result->execute();
+    }
+
 
 }

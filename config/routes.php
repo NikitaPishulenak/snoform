@@ -6,6 +6,7 @@ return array(
 	'snoform/register' => 'user/register', //регистрация пользователя
 	'snoform/cabinet/edit/saveForm' => 'main/saveF',
 	'snoform/cabinet/edit/([0-9]+)' => 'cabinet/editForm/$1',
+	'snoform/cabinet/del/([0-9]+)' => 'cabinet/delete/$1',
 	'snoform/cabinet' => 'cabinet/index',
 
 	'snoform/csv' => 'admin/downloadCSV',

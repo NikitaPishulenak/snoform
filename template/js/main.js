@@ -1,8 +1,7 @@
 
-//jQuery time
-var current_fs, next_fs, previous_fs; //fieldsets
-var left, opacity, scale; //fieldset properties which we will animate
-var animating; //flag to prevent quick multi-click glitches
+var current_fs, next_fs, previous_fs; 
+var left, opacity, scale;
+var animating;
 var statusVal='';
 var stepVerify=true; //Фрлаг есть ли ошибка валидации. Не пускать на другую страницу
 const rootF='/snoform';
@@ -29,14 +28,6 @@ $(".next").click(function(){
 
     
     if(statusVal){
-        // if ($(this).hasClass('submit')){
-        //     console.log('sdcsdcsdcsdcsdcsdcs');
-        //     document.location.href = rootF+"/sendForm";
-        // } else if ($(this).hasClass('save')){
-        //     console.log('swve');
-        //     document.location.href = rootF+"/saveForm";
-        // }
-
         //activate next step on progressbar using the index of next_fs
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
         
@@ -45,12 +36,8 @@ $(".next").click(function(){
         //hide the current fieldset with style
         current_fs.animate({opacity: 0}, {
             step: function(now, mx) {
-                //as the opacity of current_fs reduces to 0 - stored in "now"
-                //1. scale current_fs down to 80%
                 scale = 1 - (1 - now) * 0.2;
-                //2. bring next_fs from the right(50%)
                 left = (now * 50)+"%";
-                //3. increase opacity of next_fs to 1 as it moves in
                 opacity = 1 - now;
                 current_fs.css({
             'transform': 'scale('+scale+')',
@@ -63,14 +50,13 @@ $(".next").click(function(){
                 current_fs.hide();
                 animating = false;
             }, 
-            //this comes from the custom easing plugin
             easing: 'easeInOutBack'
         });
 
     }
     if(animating) return false;
     animating = true;
-    $('html, body').animate({scrollTop: 400},500);
+    $('html, body').animate({scrollTop: 200},500);
 });
 
 $("input.reg-button").click(function(){
@@ -89,6 +75,10 @@ $("input.reg-button").click(function(){
         showError('input#password2Reg', 'Введенные пароли не совпадают!');
     }
     return stepVerify;
+});
+
+$("input.submit").dblclick(function(e){
+    e.preventDefault();
 });
 
 $("input.login-button").click(function(){
@@ -113,17 +103,11 @@ $(".previous").click(function(){
     //de-activate current step on progressbar
     $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
     
-    //show the previous fieldset
     previous_fs.show(); 
-    //hide the current fieldset with style
     current_fs.animate({opacity: 0}, {
         step: function(now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale previous_fs from 80% to 100%
             scale = 0.8 + (1 - now) * 0.2;
-            //2. take current_fs to the right(50%) - from 0%
             left = ((1-now) * 50)+"%";
-            //3. increase opacity of previous_fs to 1 as it moves in
             opacity = 1 - now;
             current_fs.css({'left': left});
             previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
@@ -133,17 +117,9 @@ $(".previous").click(function(){
             current_fs.hide();
             animating = false;
         }, 
-        //this comes from the custom easing plugin
         easing: 'easeInOutBack'
     });
 });
-
-// $("div#downloadCSV").click(function(){
-//     window.URL = window.URL || window.webkiURL;
-//     var blob = new Blob(["\ufeff", csv]);
-//     var blobURL = window.URL.createObjectURL(blob);
-//     $("<a></a>").attr("href", blobURL).attr("download", nameGroup+"("+translite(nameSubject)+")_"+translite(namePL)+".csv").text("Экспортировать в Excel").appendTo('.export');   
-// });
 
 
 function stepsValidate(step){
@@ -171,7 +147,6 @@ function stepsValidate(step){
         
         case "step3":  
             step3Verify();
-         // return stepVerify;
         break;
 
     }
@@ -214,7 +189,7 @@ function CheckFile(file, typeFile) {
     var good_size = false;// Флаг для валидации размера файла
     var maxsize = 1048576;
     var iSize = 0;// Для хранения размера загружаемого файла
-    var error = '';// Для хранения ошибки
+    var error = '';
 
     iSize = $(file)[0].files[0].size;
 
@@ -253,7 +228,6 @@ function CheckFile(file, typeFile) {
     }
     // Если есть ошибки
     if (error != '') {
-        // очищаем значение input file
         $(file).val("");
         alert(error);
     }
@@ -297,6 +271,8 @@ function step2Verify(){
     }
     if($("input#telAuthor1").val().trim().length==0){
         showError('input#telAuthor1', 'Заполните поле!');
+    }else if($("input#telAuthor1").val().trim().length<10){
+        showError('input#telAuthor1', 'Мало цифр в номере!');
     }
 }
 
@@ -327,7 +303,6 @@ function step3Verify(){
 $(document).ready(function(){
     $("#fullNameUniver1, #fullNameUniver2, #nameOtherUniversitySupervisor1, #nameOtherUniversitySupervisor2").prop('disabled', true);
     $("#otherFac1, #otherFac2").prop('disabled', true);
-    $(".tel").mask('+375-(99)-999-99-99');
     $("#coauthor, #secondSupervisor").hide();
     $("input[name='universityName1']").change(function(){
         ($("input[name='universityName1']:checked").val()!="0") ? $("#abbreviatureUniver1").val("БГМУ") : $("#abbreviatureUniver1").val("");
@@ -342,59 +317,42 @@ $(document).ready(function(){
         }
     });
 
-    $("button#selAll").click(function(){
+    $("a#selAll").click(function(){
         $("div.sectionItem").each(function(){
             $(this).addClass("selected");
         });
     });
 
-    $("button#cancelAll").click(function(){
+    $("a#cancelAll").click(function(){
         $("div.sectionItem").each(function(){
             $(this).removeClass("selected");
         });
     });
 
-    $("button.exportSel").click(function(){
+    $("a.exportSel").click(function(){
         var masSel=[];
         $("div.selected").each(function(){
-            $(this).removeClass("selected");
             masSel.push($(this).attr('data-idS'));
+            $(this).removeClass("selected");
         });
 
         if(masSel.length>0){
-            $.ajax({
-                type: 'post',
-                url: 'export.php',
-                data: {
-                    'arrIDsS': masSel
-                },
-                success: function (response) {
-                    console.log(response);
-                    $('div.basta').remove();
-                },
-                beforeSend:function () {
-                    $("body").append('<div class="basta"><img src="/snoform/template/images/loading1.gif" class="loading_img"></div>');                },
-                error: function () {
-                    $('div.basta').remove();
-                    alert("Что-то пошло не так.");
-                }
-            }); 
+            $(this).attr("href", "export.php?arr="+masSel);
         }else{
             alert("Сначала выбери секцию.");
         }
-
-        
     });
 
-
-    function whereIsMyMoney() {
-        $("body").append('<div class="basta">Вы используете бесплатную версию продукта.<br> Для снятия ограничений обратитесь к разработчику.<br> Для продолжения работы нажмите F5</div>');
-    }
-
-    // var timerId = setTimeout(function whereIsMyMoney() {
-    //   $("body").append('<div class="basta">Вы используете бесплатную версию продукта.<br> Для снятия ограничений обратитесь к разработчику.<br> Для продолжения работы нажмите F5</div>');
-    //   timerId = setTimeout(whereIsMyMoney, 60000);
-    // }, 60000);
-        
+    $('a.delReport').click(function(){
+        var id=$(this).attr('data-idReport');
+        var titleReport=$(this).parent().parent().find('strong.titleR').text();
+        var isDel=confirm("Вы действительно хотите удалить зарегистрированный доклад: "+titleReport);
+        if(isDel){
+            $.post(rootF+"/cabinet/del/"+id, {}, function (data) {
+                location.reload();
+            });
+        }
+        return false;
+    });
+       
 });
-

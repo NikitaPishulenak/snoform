@@ -163,7 +163,7 @@ class User
     public static function getUserReports($idUser)
     {
         $idUser = intval($idUser);
-        $reports = Base::select("SELECT id_report, title_report, fio1, fio2 FROM reports WHERE id_user = ".$idUser." ORDER BY id_report  DESC");
+        $reports = Base::select("SELECT id_report, title_report, fio1, fio2, (SELECT S.name_section FROM sections AS S WHERE S.id_section=R.id_sections) AS s_name FROM reports AS R WHERE id_user = ".$idUser." and del=0 ORDER BY id_report  DESC");
         return $reports;
         
     }

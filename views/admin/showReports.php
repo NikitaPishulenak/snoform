@@ -8,10 +8,11 @@
                     <h3>На данный момент база данных пуста!</h3>
                 <?php else: ?>
                     <div class="col">
-                        <button id="selAll">Выделить все</button>
-                        <button id="cancelAll">Отменить все</button>
-                        <button class="exportSel">Экспортировать</button>
+                        <a id="selAll" class="btn btn-info col-xs-12 col-sm-3">Выделить все</a>
+                        <a id="cancelAll" class="btn btn-info col-xs-12 col-sm-3">Отменить все</a>
+                        <a class="btn btn-info exportSel col-md-4 col-xs-12 col-sm-3" target="blank">Экспортировать</a>
                     </div>
+                    <br>
                     <?php foreach ($completedReports as $cr):?>
                         <div class="sectionItem" data-idS="<?php echo $cr['id_sections'];?>">
                             <strong><?php echo $cr['sName']; ?></strong><br>

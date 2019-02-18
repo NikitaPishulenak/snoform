@@ -1,6 +1,7 @@
 <?php
 session_start();
 define ('rootFolder', '/snoform');
+define ('vc', '?v=1');
 
 // FRONT COTROLLER
 

@@ -72,7 +72,7 @@ class Base
             self::write_smtp_response($socket, 'QUIT');
             self::read_smtp_answer($socket); // ответ сервера
         } catch (Exception $e) {
-            echo "\nError: ".$e->getMessage();
+            // echo "\nError: ".$e->getMessage();
         }
        
         if (isset($socket)) {

@@ -96,7 +96,7 @@
                         <option value=".by" selected>+375</option>
                         <option value=".ru">+7</option>
                     <input type="text" id="phoneNumber" /> -->
-                    <input type="text" name="telAuthor1" id="telAuthor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" value="<?php if (isset($reportData['telAuthor1'])) echo $reportData['telAuthor1']; ?>" />
+                    +&nbsp;<input autocomplete="off" type="text" name="telAuthor1" id="telAuthor1" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12" value="<?php if (isset($reportData['telAuthor1'])) echo $reportData['telAuthor1']; ?>" />
 
 
                     <div id="coauthorE">
@@ -141,7 +141,7 @@
                         <input type="email"  maxlength="140" name="emailAuthor2" id="emailAuthor2" value="<?php if (isset($reportData['emailAuthor2'])) echo $reportData['emailAuthor2']; ?>" placeholder="example@exam.ru" />
 
                         <div class="titleBlock"><strong> Телефон соавтора </strong></div>
-                        <input type="text" name="telAuthor2" id="telAuthor2" value="<?php if (isset($reportData['telAuthor2'])) echo $reportData['telAuthor2']; ?>" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                        +&nbsp;<input autocomplete="off" type="text" name="telAuthor2" id="telAuthor2" value="<?php if (isset($reportData['telAuthor2'])) echo $reportData['telAuthor2']; ?>" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12" />
 
                     </div>
 
@@ -199,7 +199,7 @@
                     <input type="text" value="<?php if (isset($reportData['departmentSupervisor1'])) echo $reportData['departmentSupervisor1']; ?>" maxlength="140" name="departmentSupervisor1" id="departmentSupervisor1" placeholder="Название кафедры">
 
                     <div class="titleBlock"><strong> Телефон 1-го научного руководителя (Telephone № of the 1st Supervisor)</strong></div>
-                    <input type="text" value="<?php if (isset($reportData['telSupervisor1'])) echo $reportData['telSupervisor1']; ?>" name="telSupervisor1" id="telSupervisor1" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                    +&nbsp;<input autocomplete="off" type="text" value="<?php if (isset($reportData['telSupervisor1'])) echo $reportData['telSupervisor1']; ?>" name="telSupervisor1" id="telSupervisor1" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12" />
                     
                     <div id="secondSupervisorE">
                         <h2 class="fs-subtitle">Информация о втором руководителе</h2>
@@ -247,7 +247,7 @@
                         <input type="text" value="<?php if (isset($reportData['departmentSupervisor2'])) echo $reportData['departmentSupervisor2']; ?>" maxlength="140" name="departmentSupervisor2" id="departmentSupervisor2" placeholder="Название кафедры">
 
                         <div class="titleBlock"><strong> Телефон 2-го научного руководителя (Telephone № of the 2st Supervisor)</strong></div>
-                        <input type="text" value="<?php if (isset($reportData['telSupervisor2'])) echo $reportData['telSupervisor2']; ?>" name="telSupervisor2" id="telSupervisor2" class="tel" placeholder="+375-(XX)-XXX-XX-XX" />
+                        +&nbsp;<input type="text" autocomplete="off" value="<?php if (isset($reportData['telSupervisor2'])) echo $reportData['telSupervisor2']; ?>" name="telSupervisor2" id="telSupervisor2" class="tel" placeholder="Номер телефона" onkeyup="this.value=this.value.replace(/[^0-9]/,'');" onkeydown="this.value=this.value.replace(/[^0-9]/,'');" maxlength="12" />
 
                     </div>
 
