@@ -42,6 +42,9 @@ class MainController
     public function actionSendF(){
 
         $result = Report::sendToDB($_REQUEST);
+        if($result){
+            $result = Report::sendMailAboutRegistration($_REQUEST['emailAuthor1'], $_REQUEST['emailAuthor2']);
+        }
         if ($result){
             require_once(ROOT . '/views/main/send.php');
             return true;

@@ -67,7 +67,6 @@ class Report extends Base
     
     //Вставляю доклад в БД
     public static function sendToDB($array) {
-        // print_r($array);
         $fioName=($array['fio2']) ? $array['fio1']."-".$array['fio2'] : $array['fio1'];
         $fioName=Base::translit($fioName);
     	$fPDF=self::saveFile($_FILES['reportFilePDF'], 1, '.pdf', $fioName, $array['sectionSel']);
@@ -141,27 +140,28 @@ class Report extends Base
         $result->bindParam(':universityNameSupervisor2', $univerNameSup2, PDO::PARAM_STR);
         $result->bindParam(':departmentSupervisor2', $array['departmentSupervisor2'], PDO::PARAM_STR);
         $result->bindParam(':telSupervisor2', $array['telSupervisor2'], PDO::PARAM_STR);
+        return $result->execute();
+    }
 
-        if($result){
-            $msg="<div><div><div><h2>Уважаемый участник!<br>Поздравляем! Вы прошли регистрацию!</h2><h4>В течение суток по электронной почте Вы получите подтверждение того, что Ваши тезисы получены и направлены на рассмотрение.</h4></div><div><h4>LXXIII АПСМиФ 2019 </h4><h4>Оргкомитет</h4></div><div><h3>КОНТАКТЫ:</h3><strong>Председатель СНО БГМУ</strong><br>Давидян Артур Валерьевич<br>
+    public static function sendMailAboutRegistration($email1, $email2)
+    {
+        $msg="<div><div><div><h2>Уважаемый участник!<br>Поздравляем! Вы прошли регистрацию!</h2></div><div><h4>LXXIII АПСМиФ 2019 </h4><h4>Оргкомитет</h4></div><div><h3>КОНТАКТЫ:</h3><strong>Председатель СНО БГМУ</strong><br>Давидян Артур Валерьевич<br>
                     Телефон: +375-29-980-53-08<br><br><strong>Заместитель председателя СНО БГМУ </strong><br>
                     по информационно-издательской и организационной работе<br> Подголина Алена Александровна<br>Телефон: +375-29-586-46-54<br><br><strong>Заместитель председателя СНО БГМУ </strong><br>
                     по внутривузовским и межуниверситетским коммуникациям<br>Пристром Игорь Юрьевич<br>Телефон: +375-44-553-44-91<br><br>
                     <em>http://sno.bsmu.by<br>E-mail: sno@bsmu.by<br>220116, г. Минск, Республика Беларусь, пр-т. Дзержинского, 83,<br>
                     учреждение образования «Белорусский государственный медицинский университет»,<br>Совет Студенческого научного общества</em></div></div>
-                    <div><div><h2>Dear participant!<br>Congratulations! You have been registered!</h2><h4>During the day you will receive the e-mail-confirmation that your abstract prepared and submitted for consideration.</h4></div><div><h4>LXXIII APMM&Ph 2019 </h4><h4>Organizing Committee</h4></div><div><h3>CONTACTS:</h3><strong>Chairman of Student Scientific Society of BSMU</strong><br>Davidyan Artur Valerievich<br>Phone: +375-29-980-53-08<br><br><strong>Vice-Chairman</strong><br>of SSS of BSMU<br>Podgolina Alena Aleksandrovna<br>Phone: +375-29-586-46-54<br><br><strong>Vice-Chairman </strong><br>of the SSS for intra-University and inter-University communications<br>Pristrom Igor Yuryevich<br>Pristrom Igor Yuryevich<br>Phone: +375-44-553-44-91<br><br><em>http://sno.bsmu.by<br>E-mail: sno@bsmu.by<br>220116, Minsk, Republic of Belarus, Dzerzhinsky Av. 83,<br>Belarusian State Medical University,<br>Council of Student Scientific Society</em></div></div></div>";
-            $emails=array();
-            if((isset($array['emailAuthor2'])) && (!empty($array['emailAuthor1']))){
-                array_push($emails, $array['emailAuthor2'], $array['emailAuthor1']);
-            }else{
-                array_push($emails, $array['emailAuthor1']);
-            }
-            foreach ($emails as $email) {
-                Base::sendMail($email, $msg);
-            }
+                    <div><div><h2>Dear participant!<br>Congratulations! You have been registered!</h2></div><div><h4>LXXIII APMM&Ph 2019 </h4><h4>Organizing Committee</h4></div><div><h3>CONTACTS:</h3><strong>Chairman of Student Scientific Society of BSMU</strong><br>Davidyan Artur Valerievich<br>Phone: +375-29-980- 53-08<br><br><strong>Vice-Chairman</strong><br>of SSS of BSMU<br>Podgolina Alena Aleksandrovna<br>Phone: +375-29-586-46-54<br><br><strong>Vice-Chairman </strong><br>of the SSS for intra-University and inter-University communications<br>Pristrom Igor Yuryevich<br>Pristrom Igor Yuryevich<br>Phone: +375-44-553-44-91<br><br><em>http://sno.bsmu.by<br>E-mail: sno@bsmu.by<br>220116, Minsk, Republic of Belarus, Dzerzhinsky Av. 83,<br>Belarusian State Medical University,<br>Council of Student Scientific Society</em></div></div></div>";
+        $emails=array();
+        if((isset($email2)) && (!empty($email2))){
+            array_push($emails, $email1, $email2);
+        }else{
+            array_push($emails, $email1);
         }
-        
-        return $result->execute();
+        foreach ($emails as $email) {
+            Base::sendMail($email, $msg);
+        }
+        return true;
     }
 
     //Получение всей информации о докладе

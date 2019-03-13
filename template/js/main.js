@@ -4,7 +4,7 @@ var left, opacity, scale;
 var animating;
 var statusVal='';
 var stepVerify=true; //Фрлаг есть ли ошибка валидации. Не пускать на другую страницу
-const rootF='/snoform';
+const rootF='';
 
 $(".next").click(function(){
     hideError();
@@ -245,7 +245,7 @@ function step1Verify(){
         showError('select#contentsReportSel', 'Выберите из списка!');
     }
 }
-
+ 
 function step2Verify(){
     if($("input#fio1").val().trim().length<3){
         showError('input#fio1', 'Заполните поле!');

@@ -6,8 +6,8 @@
         <title>Конференция</title>
 
         <link href="<?php echo rootFolder; ?>/template/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo rootFolder; ?>/template/css/style.css<?php echo vc; ?>"/>     
-        <link rel="shortcut icon" href="<?php echo rootFolder; ?>/template/images/ico/favicon.ico">
+        <link rel="stylesheet" href="<?php echo rootFolder; ?>/template/css/style.css<?php echo vc; ?>">   
+        <link type="image/x-icon" rel="shortcut icon" href="/template/images/favicon.ico">
     </head>
 
     <body>

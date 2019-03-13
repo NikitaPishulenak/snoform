@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <br><strong>Информация по состоянию на <?php echo Date('d-m-Y G:i'); ?></strong><br><br>
+            <br><strong>Информация по состоянию на <?php echo $nowDateTime; ?></strong><br><br>
             <?php if (empty($completedReports)): ?>
                     <h3>На данный момент база данных пуста!</h3>
                 <?php else: ?>

@@ -6,4 +6,4 @@
 	RewriteCond %{REQUEST_FILENAME} !-d
 
 	RewriteRule ^(.*)$ snoform/index.php
-</IfModule>
+</IfModule> 

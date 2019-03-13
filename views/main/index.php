@@ -12,8 +12,9 @@
                 <h2 class="fs-title">Доклад</h2>
                 <h3 class="fs-subtitle">Информация о докладе</h3>
                 <div class="col downloadRule">
-                    <a href="/snoform/reports/rule.pdf" download>Правила оформления тезисов</a><br>
-                    <a href="/snoform/reports/template.doc" download>Шаблон оформления тезисов</a>
+                    <a href="/snoform/reports/rule.pdf" download>Правила оформления тезисов</a>
+                    <a href="/snoform/reports/template.doc" download> Шаблон оформления тезисов для докладов, содержащих собственные результаты исследования</a>
+                    <a href="/snoform/reports/template_simple.doc" download> Шаблон оформления тезисов для реферативных докладов</a>
                 </div>
                 <div class="contentF" >
                     <div class="titleBlock"><strong> Название работы (Title of Paper)</strong><span class="req">*</span></div>
